@@ -275,7 +275,7 @@ export class IPTVApi {
 export class DeviceCodeApi {
     private apiUrl: string;
 
-    constructor(apiUrl: string = 'http://api.polfun.de/api/device.php') {
+    constructor(apiUrl: string = 'https://api.polfun.de/api/device.php') {
         this.apiUrl = apiUrl;
     }
 
