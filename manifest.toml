@@ -3,13 +3,15 @@
 # React Native Application for Amazon Fire TV Stick (Vega OS / Kepler)
 # ============================================================================
 
+schema_version = 1
+
 [package]
-name = "TestApp"
+title = "TestApp"
 id = "com.testapp.vegaos"
 version = "1.0.0"
 description = "React Native Application for Amazon Vega OS/Kepler"
 author = "TestApp Team"
-icon = "assets/images/icon.png"
+icon = "@image/icon.png"
 
 # ============================================================================
 # COMPONENTS
@@ -19,50 +21,8 @@ icon = "assets/images/icon.png"
 id = "com.testapp.vegaos.main"
 name = "TestApp"
 entry = "index"
-icon = "assets/images/icon.png"
+icon = "@image/icon.png"
 
-# Runtime module for React Native
-runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
-
-# Launch options
-[components.interactive.launch-options]
-splash-screen = "assets/images/splash.png"
-
-# ============================================================================
-# REQUIRED SERVICES (needs) - app won't start without these
-# ============================================================================
-
-[needs]
-
-# Internet access
-[[needs.privilege]]
-id = "com.amazon.privilege.network.client"
-
-# ============================================================================
-# OPTIONAL SERVICES (wants) - app can run without these
-# ============================================================================
-
-[wants]
-
-# Device information
-[[wants.service]]
-id = "com.amazon.device.info"
-
-# Data storage
-[[wants.privilege]]
-id = "com.amazon.privilege.filesystem.scratch.readwrite"
-
-# ============================================================================
-# ADDITIONAL CONFIGURATION
-# ============================================================================
-
-[extras]
-
-# Disable screen rotation - TV is always landscape
-screen-orientation = "landscape"
-
-# TV input support
-tv-input = true
-
-# Fullscreen display
-fullscreen = true
+[permissions]
+internet = true
+storage = true
