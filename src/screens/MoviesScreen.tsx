@@ -3,7 +3,7 @@
  * Displays movie categories and films
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { VodCategory, VodMovie } from '../services/iptvApi';
+import {VodCategory, VodMovie} from '../services/iptvApi';
 
 interface MoviesScreenProps {
   categories: VodCategory[];
@@ -39,27 +39,25 @@ export const MoviesScreen: React.FC<MoviesScreenProps> = ({
     onSelectCategory(categoryId);
   };
 
-  const renderCategory = ({ item }: { item: VodCategory }) => (
+  const renderCategory = ({item}: {item: VodCategory}) => (
     <TouchableOpacity
       style={[
         styles.categoryItem,
         selectedCategoryId === item.category_id && styles.categoryItemSelected,
       ]}
-      onPress={() => handleCategorySelect(item.category_id)}
-    >
+      onPress={() => handleCategorySelect(item.category_id)}>
       <Text style={styles.categoryText}>{item.category_name}</Text>
     </TouchableOpacity>
   );
 
-  const renderMovie = ({ item }: { item: VodMovie }) => (
+  const renderMovie = ({item}: {item: VodMovie}) => (
     <TouchableOpacity
       style={styles.movieItem}
       onPress={() => onSelectMovie(item)}
-      hasTVPreferredFocus={item.num === 1}
-    >
+      hasTVPreferredFocus={item.num === 1}>
       {item.stream_icon ? (
         <Image
-          source={{ uri: item.stream_icon }}
+          source={{uri: item.stream_icon}}
           style={styles.moviePoster}
           resizeMode="cover"
         />
@@ -99,7 +97,7 @@ export const MoviesScreen: React.FC<MoviesScreenProps> = ({
           <FlatList
             data={categories}
             renderItem={renderCategory}
-            keyExtractor={(item) => item.category_id}
+            keyExtractor={item => item.category_id}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -119,7 +117,7 @@ export const MoviesScreen: React.FC<MoviesScreenProps> = ({
             <FlatList
               data={movies}
               renderItem={renderMovie}
-              keyExtractor={(item) => item.stream_id.toString()}
+              keyExtractor={item => item.stream_id.toString()}
               numColumns={4}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.moviesList}

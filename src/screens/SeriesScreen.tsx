@@ -3,7 +3,7 @@
  * Displays series categories and shows
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { SeriesCategory, SeriesInfo } from '../services/iptvApi';
+import {SeriesCategory, SeriesInfo} from '../services/iptvApi';
 
 interface SeriesScreenProps {
   categories: SeriesCategory[];
@@ -39,27 +39,25 @@ export const SeriesScreen: React.FC<SeriesScreenProps> = ({
     onSelectCategory(categoryId);
   };
 
-  const renderCategory = ({ item }: { item: SeriesCategory }) => (
+  const renderCategory = ({item}: {item: SeriesCategory}) => (
     <TouchableOpacity
       style={[
         styles.categoryItem,
         selectedCategoryId === item.category_id && styles.categoryItemSelected,
       ]}
-      onPress={() => handleCategorySelect(item.category_id)}
-    >
+      onPress={() => handleCategorySelect(item.category_id)}>
       <Text style={styles.categoryText}>{item.category_name}</Text>
     </TouchableOpacity>
   );
 
-  const renderSeries = ({ item }: { item: SeriesInfo }) => (
+  const renderSeries = ({item}: {item: SeriesInfo}) => (
     <TouchableOpacity
       style={styles.seriesItem}
       onPress={() => onSelectSeries(item)}
-      hasTVPreferredFocus={item.num === 1}
-    >
+      hasTVPreferredFocus={item.num === 1}>
       {item.cover ? (
         <Image
-          source={{ uri: item.cover }}
+          source={{uri: item.cover}}
           style={styles.seriesPoster}
           resizeMode="cover"
         />
@@ -104,7 +102,7 @@ export const SeriesScreen: React.FC<SeriesScreenProps> = ({
           <FlatList
             data={categories}
             renderItem={renderCategory}
-            keyExtractor={(item) => item.category_id}
+            keyExtractor={item => item.category_id}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -124,7 +122,7 @@ export const SeriesScreen: React.FC<SeriesScreenProps> = ({
             <FlatList
               data={series}
               renderItem={renderSeries}
-              keyExtractor={(item) => item.series_id.toString()}
+              keyExtractor={item => item.series_id.toString()}
               numColumns={4}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.seriesList}

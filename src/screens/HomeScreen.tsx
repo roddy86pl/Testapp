@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { APP_NAME } from '../utils/constants';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {APP_NAME} from '../utils/constants';
 
 interface HomeScreenProps {
   username: string;
@@ -64,8 +64,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         <TouchableOpacity
           style={[styles.card, styles.cardLarge]}
           onPress={onNavigateLiveTV}
-          hasTVPreferredFocus={true}
-        >
+          hasTVPreferredFocus={true}>
           <Text style={styles.cardIcon}>▶</Text>
           <Text style={styles.cardTitle}>Telewizja na żywo</Text>
           <Text style={styles.cardCount}>{liveTvCount} kanałów</Text>
@@ -76,8 +75,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Movies */}
           <TouchableOpacity
             style={[styles.card, styles.cardSmall]}
-            onPress={onNavigateMovies}
-          >
+            onPress={onNavigateMovies}>
             <Text style={styles.cardIcon}>🎬</Text>
             <Text style={styles.cardTitle}>Filmy</Text>
             <Text style={styles.cardCount}>{moviesCount}</Text>
@@ -86,8 +84,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Series */}
           <TouchableOpacity
             style={[styles.card, styles.cardSmall]}
-            onPress={onNavigateSeries}
-          >
+            onPress={onNavigateSeries}>
             <Text style={styles.cardIcon}>📺</Text>
             <Text style={styles.cardTitle}>Seriale</Text>
             <Text style={styles.cardCount}>{seriesCount}</Text>
@@ -96,8 +93,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {/* Account */}
           <TouchableOpacity
             style={[styles.card, styles.cardSmall]}
-            onPress={onNavigateAccount}
-          >
+            onPress={onNavigateAccount}>
             <Text style={styles.cardIcon}>👤</Text>
             <Text style={styles.cardTitle}>Konto</Text>
             <Text style={styles.cardCount}>Informacje</Text>
@@ -107,8 +103,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           {onNavigateSettings && (
             <TouchableOpacity
               style={[styles.card, styles.cardSmall]}
-              onPress={onNavigateSettings}
-            >
+              onPress={onNavigateSettings}>
               <Text style={styles.cardIcon}>⚙️</Text>
               <Text style={styles.cardTitle}>Ustawienia</Text>
               <Text style={styles.cardCount}>Konfiguracja</Text>

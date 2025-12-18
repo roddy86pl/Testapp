@@ -3,7 +3,7 @@
  * Displays categories and channels
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { LiveCategory, LiveChannel } from '../services/iptvApi';
+import {LiveCategory, LiveChannel} from '../services/iptvApi';
 
 interface LiveTVScreenProps {
   categories: LiveCategory[];
@@ -39,27 +39,25 @@ export const LiveTVScreen: React.FC<LiveTVScreenProps> = ({
     onSelectCategory(categoryId);
   };
 
-  const renderCategory = ({ item }: { item: LiveCategory }) => (
+  const renderCategory = ({item}: {item: LiveCategory}) => (
     <TouchableOpacity
       style={[
         styles.categoryItem,
         selectedCategoryId === item.category_id && styles.categoryItemSelected,
       ]}
-      onPress={() => handleCategorySelect(item.category_id)}
-    >
+      onPress={() => handleCategorySelect(item.category_id)}>
       <Text style={styles.categoryText}>{item.category_name}</Text>
     </TouchableOpacity>
   );
 
-  const renderChannel = ({ item }: { item: LiveChannel }) => (
+  const renderChannel = ({item}: {item: LiveChannel}) => (
     <TouchableOpacity
       style={styles.channelItem}
       onPress={() => onSelectChannel(item)}
-      hasTVPreferredFocus={item.num === 1}
-    >
+      hasTVPreferredFocus={item.num === 1}>
       {item.stream_icon ? (
         <Image
-          source={{ uri: item.stream_icon }}
+          source={{uri: item.stream_icon}}
           style={styles.channelIcon}
           resizeMode="cover"
         />
@@ -95,7 +93,7 @@ export const LiveTVScreen: React.FC<LiveTVScreenProps> = ({
           <FlatList
             data={categories}
             renderItem={renderCategory}
-            keyExtractor={(item) => item.category_id}
+            keyExtractor={item => item.category_id}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -115,7 +113,7 @@ export const LiveTVScreen: React.FC<LiveTVScreenProps> = ({
             <FlatList
               data={channels}
               renderItem={renderChannel}
-              keyExtractor={(item) => item.stream_id.toString()}
+              keyExtractor={item => item.stream_id.toString()}
               numColumns={3}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.channelsList}

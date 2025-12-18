@@ -3,7 +3,7 @@
  * Video player for live TV, movies, and series episodes
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -35,9 +35,9 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
       'Zakończyć odtwarzanie?',
       'Czy na pewno chcesz wyjść z odtwarzacza?',
       [
-        { text: 'Nie', style: 'cancel' },
-        { text: 'Tak', onPress: onBack },
-      ]
+        {text: 'Nie', style: 'cancel'},
+        {text: 'Tak', onPress: onBack},
+      ],
     );
   }, [onBack]);
 
@@ -48,7 +48,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
       () => {
         handleExit();
         return true;
-      }
+      },
     );
 
     return () => backHandler.remove();
@@ -114,15 +114,13 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
         <TouchableOpacity
           style={styles.controlsOverlay}
           onPress={() => setShowControls(false)}
-          activeOpacity={1}
-        >
+          activeOpacity={1}>
           {/* Top Bar */}
           <View style={styles.topBar}>
             <TouchableOpacity
               style={styles.exitButton}
               onPress={handleExit}
-              hasTVPreferredFocus={true}
-            >
+              hasTVPreferredFocus={true}>
               <Text style={styles.exitButtonText}>← Wyjdź</Text>
             </TouchableOpacity>
             <Text style={styles.titleText} numberOfLines={1}>
@@ -137,15 +135,13 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
           <View style={styles.centerControls}>
             <TouchableOpacity
               style={styles.controlButton}
-              onPress={() => handleSeek(-10)}
-            >
+              onPress={() => handleSeek(-10)}>
               <Text style={styles.controlButtonText}>⏪ 10s</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.controlButton, styles.playPauseButton]}
-              onPress={togglePlayPause}
-            >
+              onPress={togglePlayPause}>
               <Text style={styles.playPauseText}>
                 {isPlaying ? '⏸️' : '▶️'}
               </Text>
@@ -153,8 +149,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
 
             <TouchableOpacity
               style={styles.controlButton}
-              onPress={() => handleSeek(10)}
-            >
+              onPress={() => handleSeek(10)}>
               <Text style={styles.controlButtonText}>10s ⏩</Text>
             </TouchableOpacity>
           </View>
@@ -165,9 +160,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
             <View style={styles.progressContainer}>
               <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
               <View style={styles.progressBar}>
-                <View
-                  style={[styles.progressFill, { width: `${progress}%` }]}
-                />
+                <View style={[styles.progressFill, {width: `${progress}%`}]} />
               </View>
               <Text style={styles.timeText}>{formatTime(duration)}</Text>
             </View>
@@ -176,29 +169,25 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
             <View style={styles.additionalControls}>
               <TouchableOpacity
                 style={styles.smallButton}
-                onPress={() => handleVolumeChange(-10)}
-              >
+                onPress={() => handleVolumeChange(-10)}>
                 <Text style={styles.smallButtonText}>🔉 -</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.smallButton}
-                onPress={() => handleVolumeChange(10)}
-              >
+                onPress={() => handleVolumeChange(10)}>
                 <Text style={styles.smallButtonText}>🔊 +</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.smallButton}
-                onPress={() => Alert.alert('Jakość', 'Wybierz jakość wideo')}
-              >
+                onPress={() => Alert.alert('Jakość', 'Wybierz jakość wideo')}>
                 <Text style={styles.smallButtonText}>⚙️ Jakość</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.smallButton}
-                onPress={() => Alert.alert('Napisy', 'Wybierz napisy')}
-              >
+                onPress={() => Alert.alert('Napisy', 'Wybierz napisy')}>
                 <Text style={styles.smallButtonText}>💬 Napisy</Text>
               </TouchableOpacity>
             </View>
@@ -217,8 +206,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
       {!showControls && (
         <TouchableOpacity
           style={styles.tapToShowControls}
-          onPress={() => setShowControls(true)}
-        >
+          onPress={() => setShowControls(true)}>
           <Text style={styles.tapToShowText}>
             Dotknij aby pokazać kontrolki
           </Text>

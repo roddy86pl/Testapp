@@ -119,7 +119,7 @@ export class IPTVApi {
    */
   private buildUrl(
     action: string,
-    additionalParams?: Record<string, string>
+    additionalParams?: Record<string, string>,
   ): string {
     const params = new URLSearchParams({
       username: this.username,
@@ -160,7 +160,7 @@ export class IPTVApi {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch live categories: ${response.statusText}`
+        `Failed to fetch live categories: ${response.statusText}`,
       );
     }
 
@@ -171,7 +171,7 @@ export class IPTVApi {
    * Get live TV streams
    */
   async getLiveStreams(categoryId?: string): Promise<LiveChannel[]> {
-    const params = categoryId ? { category_id: categoryId } : undefined;
+    const params = categoryId ? {category_id: categoryId} : undefined;
     const url = this.buildUrl('get_live_streams', params);
     const response = await fetch(url);
 
@@ -200,7 +200,7 @@ export class IPTVApi {
    * Get VOD streams (movies)
    */
   async getVodStreams(categoryId?: string): Promise<VodMovie[]> {
-    const params = categoryId ? { category_id: categoryId } : undefined;
+    const params = categoryId ? {category_id: categoryId} : undefined;
     const url = this.buildUrl('get_vod_streams', params);
     const response = await fetch(url);
 
@@ -220,7 +220,7 @@ export class IPTVApi {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch series categories: ${response.statusText}`
+        `Failed to fetch series categories: ${response.statusText}`,
       );
     }
 
@@ -231,7 +231,7 @@ export class IPTVApi {
    * Get series list
    */
   async getSeries(categoryId?: string): Promise<SeriesInfo[]> {
-    const params = categoryId ? { category_id: categoryId } : undefined;
+    const params = categoryId ? {category_id: categoryId} : undefined;
     const url = this.buildUrl('get_series', params);
     const response = await fetch(url);
 
@@ -246,8 +246,8 @@ export class IPTVApi {
    * Get series info with episodes
    */
   async getSeriesInfo(
-    seriesId: number
-  ): Promise<{ info: SeriesInfo; episodes: Record<string, Episode[]> }> {
+    seriesId: number,
+  ): Promise<{info: SeriesInfo; episodes: Record<string, Episode[]>}> {
     const url = this.buildUrl('get_series_info', {
       series_id: seriesId.toString(),
     });
@@ -307,7 +307,7 @@ export class DeviceCodeApi {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ deviceCode }),
+      body: JSON.stringify({deviceCode}),
     });
 
     if (!response.ok) {

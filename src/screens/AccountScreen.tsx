@@ -12,7 +12,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { UserInfo } from '../services/iptvApi';
+import {UserInfo} from '../services/iptvApi';
 
 interface AccountScreenProps {
   userInfo: UserInfo;
@@ -32,9 +32,9 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
       'Wyjść z aplikacji?',
       'Czy na pewno chcesz opuścić aplikację?',
       [
-        { text: 'Anuluj', style: 'cancel' },
-        { text: 'Wyjdź', onPress: onLogout, style: 'destructive' },
-      ]
+        {text: 'Anuluj', style: 'cancel'},
+        {text: 'Wyjdź', onPress: onLogout, style: 'destructive'},
+      ],
     );
   };
 
@@ -81,8 +81,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
             style={[
               styles.statusBadge,
               isExpired() ? styles.expiredBadge : styles.activeBadge,
-            ]}
-          >
+            ]}>
             <Text style={styles.statusText}>
               {isExpired() ? '❌ Wygasło' : '✅ Aktywne'}
             </Text>
@@ -107,8 +106,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
             <View style={styles.detailRow}>
               <Text style={styles.detailLabel}>Data wygaśnięcia:</Text>
               <Text
-                style={[styles.detailValue, isExpired() && styles.expiredText]}
-              >
+                style={[styles.detailValue, isExpired() && styles.expiredText]}>
                 {formatDate(userInfo.exp_date)}
               </Text>
             </View>
@@ -185,8 +183,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
           <TouchableOpacity
             style={[styles.actionButton, styles.exitButton]}
             onPress={handleExit}
-            hasTVPreferredFocus={true}
-          >
+            hasTVPreferredFocus={true}>
             <Text style={styles.actionButtonText}>🚪 Wyjdź z aplikacji</Text>
           </TouchableOpacity>
         </View>

@@ -3,7 +3,7 @@
  * Application settings and preferences
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -37,7 +37,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       'Wyczyść pamięć podręczną',
       'Czy na pewno chcesz wyczyścić cache aplikacji?',
       [
-        { text: 'Anuluj', style: 'cancel' },
+        {text: 'Anuluj', style: 'cancel'},
         {
           text: 'Wyczyść',
           onPress: () => {
@@ -45,7 +45,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             Alert.alert('Gotowe', 'Pamięć podręczna została wyczyszczona');
           },
         },
-      ]
+      ],
     );
   };
 
@@ -54,7 +54,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       'Resetuj ustawienia',
       'Czy na pewno chcesz przywrócić domyślne ustawienia?',
       [
-        { text: 'Anuluj', style: 'cancel' },
+        {text: 'Anuluj', style: 'cancel'},
         {
           text: 'Resetuj',
           onPress: () => {
@@ -65,7 +65,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             Alert.alert('Gotowe', 'Ustawienia zostały zresetowane');
           },
         },
-      ]
+      ],
     );
   };
 
@@ -87,8 +87,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           <TouchableOpacity
             style={styles.settingRow}
             onPress={() => setAutoplay(!autoplay)}
-            hasTVPreferredFocus={true}
-          >
+            hasTVPreferredFocus={true}>
             <View style={styles.settingInfo}>
               <Text style={styles.settingName}>Automatyczne odtwarzanie</Text>
               <Text style={styles.settingDescription}>
@@ -102,8 +101,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
           <TouchableOpacity
             style={styles.settingRow}
-            onPress={() => setHdQuality(!hdQuality)}
-          >
+            onPress={() => setHdQuality(!hdQuality)}>
             <View style={styles.settingInfo}>
               <Text style={styles.settingName}>Jakość HD</Text>
               <Text style={styles.settingDescription}>
@@ -117,8 +115,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
           <TouchableOpacity
             style={styles.settingRow}
-            onPress={() => setSubtitles(!subtitles)}
-          >
+            onPress={() => setSubtitles(!subtitles)}>
             <View style={styles.settingInfo}>
               <Text style={styles.settingName}>Napisy</Text>
               <Text style={styles.settingDescription}>
@@ -137,8 +134,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
           <TouchableOpacity
             style={styles.settingRow}
-            onPress={() => setNotifications(!notifications)}
-          >
+            onPress={() => setNotifications(!notifications)}>
             <View style={styles.settingInfo}>
               <Text style={styles.settingName}>Powiadomienia</Text>
               <Text style={styles.settingDescription}>
@@ -198,8 +194,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
           <TouchableOpacity
             style={styles.actionRow}
-            onPress={handleResetSettings}
-          >
+            onPress={handleResetSettings}>
             <View style={styles.settingInfo}>
               <Text style={styles.settingName}>Resetuj ustawienia</Text>
               <Text style={styles.settingDescription}>

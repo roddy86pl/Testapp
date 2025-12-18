@@ -12,7 +12,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { VodMovie } from '../services/iptvApi';
+import {VodMovie} from '../services/iptvApi';
 
 interface MovieDetailsScreenProps {
   movie: VodMovie;
@@ -40,7 +40,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
         <View style={styles.posterContainer}>
           {movie.stream_icon ? (
             <Image
-              source={{ uri: movie.stream_icon }}
+              source={{uri: movie.stream_icon}}
               style={styles.poster}
               resizeMode="cover"
             />
@@ -54,8 +54,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
           <TouchableOpacity
             style={styles.playButtonOverlay}
             onPress={() => onPlay(movie)}
-            hasTVPreferredFocus={true}
-          >
+            hasTVPreferredFocus={true}>
             <View style={styles.playButton}>
               <Text style={styles.playButtonText}>▶ Odtwórz</Text>
             </View>
@@ -79,7 +78,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
                 <Text style={styles.metaLabel}>Dodano:</Text>
                 <Text style={styles.metaValue}>
                   {new Date(
-                    parseInt(movie.added, 10) * 1000
+                    parseInt(movie.added, 10) * 1000,
                   ).toLocaleDateString('pl-PL')}
                 </Text>
               </View>
@@ -114,15 +113,13 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
           <View style={styles.actionsContainer}>
             <TouchableOpacity
               style={[styles.actionButton, styles.primaryButton]}
-              onPress={() => onPlay(movie)}
-            >
+              onPress={() => onPlay(movie)}>
               <Text style={styles.actionButtonText}>▶ Odtwórz teraz</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.actionButton, styles.secondaryButton]}
-              onPress={() => console.log('Add to favorites')}
-            >
+              onPress={() => console.log('Add to favorites')}>
               <Text style={styles.actionButtonText}>
                 ❤️ Dodaj do ulubionych
               </Text>

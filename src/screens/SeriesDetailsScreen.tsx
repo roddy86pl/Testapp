@@ -12,7 +12,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import { SeriesInfo } from '../services/iptvApi';
+import {SeriesInfo} from '../services/iptvApi';
 
 interface SeriesDetailsScreenProps {
   series: SeriesInfo;
@@ -40,7 +40,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
         <View style={styles.coverContainer}>
           {series.cover ? (
             <Image
-              source={{ uri: series.cover }}
+              source={{uri: series.cover}}
               style={styles.cover}
               resizeMode="cover"
             />
@@ -54,8 +54,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
           <TouchableOpacity
             style={styles.viewButtonOverlay}
             onPress={() => onViewEpisodes(series)}
-            hasTVPreferredFocus={true}
-          >
+            hasTVPreferredFocus={true}>
             <View style={styles.viewButton}>
               <Text style={styles.viewButtonText}>📺 Zobacz odcinki</Text>
             </View>
@@ -139,7 +138,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
                 <Text style={styles.techInfoText}>
                   Ostatnia aktualizacja:{' '}
                   {new Date(
-                    parseInt(series.last_modified, 10) * 1000
+                    parseInt(series.last_modified, 10) * 1000,
                   ).toLocaleDateString('pl-PL')}
                 </Text>
               )}
@@ -150,15 +149,13 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
           <View style={styles.actionsContainer}>
             <TouchableOpacity
               style={[styles.actionButton, styles.primaryButton]}
-              onPress={() => onViewEpisodes(series)}
-            >
+              onPress={() => onViewEpisodes(series)}>
               <Text style={styles.actionButtonText}>📺 Zobacz odcinki</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[styles.actionButton, styles.secondaryButton]}
-              onPress={() => console.log('Add to favorites')}
-            >
+              onPress={() => console.log('Add to favorites')}>
               <Text style={styles.actionButtonText}>
                 ❤️ Dodaj do ulubionych
               </Text>
@@ -171,8 +168,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
               style={styles.trailerButton}
               onPress={() =>
                 console.log('Play trailer:', series.youtube_trailer)
-              }
-            >
+              }>
               <Text style={styles.trailerButtonText}>🎬 Obejrzyj zwiastun</Text>
             </TouchableOpacity>
           )}

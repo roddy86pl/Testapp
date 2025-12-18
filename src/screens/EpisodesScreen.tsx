@@ -3,7 +3,7 @@
  * Displays episodes of a selected series
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { Episode, SeriesInfo } from '../services/iptvApi';
+import {Episode, SeriesInfo} from '../services/iptvApi';
 
 interface EpisodesScreenProps {
   seriesInfo: SeriesInfo;
@@ -31,42 +31,39 @@ export const EpisodesScreen: React.FC<EpisodesScreenProps> = ({
   loading = false,
 }) => {
   const seasons = Object.keys(episodes).sort(
-    (a, b) => parseInt(a, 10) - parseInt(b, 10)
+    (a, b) => parseInt(a, 10) - parseInt(b, 10),
   );
   const [selectedSeason, setSelectedSeason] = useState<string>(
-    seasons[0] || '1'
+    seasons[0] || '1',
   );
 
   const currentEpisodes = episodes[selectedSeason] || [];
 
-  const renderSeason = ({ item }: { item: string }) => (
+  const renderSeason = ({item}: {item: string}) => (
     <TouchableOpacity
       style={[
         styles.seasonItem,
         selectedSeason === item && styles.seasonItemSelected,
       ]}
-      onPress={() => setSelectedSeason(item)}
-    >
+      onPress={() => setSelectedSeason(item)}>
       <Text style={styles.seasonText}>Sezon {item}</Text>
     </TouchableOpacity>
   );
 
-  const renderEpisode = ({ item }: { item: Episode }) => (
+  const renderEpisode = ({item}: {item: Episode}) => (
     <TouchableOpacity
       style={styles.episodeItem}
       onPress={() => onSelectEpisode(item)}
-      hasTVPreferredFocus={item.episode_num === 1}
-    >
+      hasTVPreferredFocus={item.episode_num === 1}>
       {item.info?.movie_image ? (
         <Image
-          source={{ uri: item.info.movie_image }}
+          source={{uri: item.info.movie_image}}
           style={styles.episodeThumbnail}
           resizeMode="cover"
         />
       ) : (
         <View
-          style={[styles.episodeThumbnail, styles.episodeThumbnailPlaceholder]}
-        >
+          style={[styles.episodeThumbnail, styles.episodeThumbnailPlaceholder]}>
           <Text style={styles.episodeThumbnailText}>▶</Text>
         </View>
       )}
@@ -116,7 +113,7 @@ export const EpisodesScreen: React.FC<EpisodesScreenProps> = ({
           <FlatList
             data={seasons}
             renderItem={renderSeason}
-            keyExtractor={(item) => item}
+            keyExtractor={item => item}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -136,7 +133,7 @@ export const EpisodesScreen: React.FC<EpisodesScreenProps> = ({
             <FlatList
               data={currentEpisodes}
               renderItem={renderEpisode}
-              keyExtractor={(item) => item.id}
+              keyExtractor={item => item.id}
               numColumns={2}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.episodesList}

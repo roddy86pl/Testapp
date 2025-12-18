@@ -3,7 +3,7 @@
  * Displays device code and registration form
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -24,7 +24,7 @@ interface LoginScreenProps {
   onLogin: (
     serverUrl: string,
     username: string,
-    password: string
+    password: string,
   ) => Promise<void>;
   onDeviceLogin: () => Promise<void>;
 }
@@ -92,8 +92,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
           style={[styles.button, styles.primaryButton]}
           onPress={handleDeviceLogin}
           disabled={loading}
-          hasTVPreferredFocus={true}
-        >
+          hasTVPreferredFocus={true}>
           <Text style={styles.buttonText}>
             {loading ? 'Ładowanie...' : 'Zaloguj kodem urządzenia'}
           </Text>
@@ -102,8 +101,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
         <TouchableOpacity
           style={[styles.button, styles.secondaryButton]}
           onPress={() => setShowForm(!showForm)}
-          disabled={loading}
-        >
+          disabled={loading}>
           <Text style={styles.buttonText}>
             {showForm ? 'Ukryj formularz' : 'Pokaż formularz rejestracji'}
           </Text>
@@ -160,8 +158,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             <TouchableOpacity
               style={[styles.button, styles.primaryButton]}
               onPress={handleRegister}
-              disabled={loading}
-            >
+              disabled={loading}>
               <Text style={styles.buttonText}>Zarejestruj</Text>
             </TouchableOpacity>
           </View>
