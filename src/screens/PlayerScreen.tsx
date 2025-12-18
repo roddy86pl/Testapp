@@ -90,7 +90,7 @@ export const PlayerScreen: React.FC<PlayerScreenProps> = ({
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
-    const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+    const progress = duration > 0 ? Math.min(100, (currentTime / duration) * 100) : 0;
 
     return (
         <View style={styles.container}>

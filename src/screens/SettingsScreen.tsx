@@ -12,6 +12,7 @@ import {
     ScrollView,
     Alert,
 } from 'react-native';
+import { APP_VERSION, PLATFORM_NAME, REACT_NATIVE_VERSION } from '../utils/constants';
 
 interface SettingsScreenProps {
     onBack: () => void;
@@ -171,11 +172,11 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                     <View style={styles.infoCard}>
                         <View style={styles.infoRow}>
                             <Text style={styles.infoLabel}>Wersja aplikacji:</Text>
-                            <Text style={styles.infoValue}>1.0.0</Text>
+                            <Text style={styles.infoValue}>{APP_VERSION}</Text>
                         </View>
                         <View style={styles.infoRow}>
                             <Text style={styles.infoLabel}>Platforma:</Text>
-                            <Text style={styles.infoValue}>Amazon Fire TV</Text>
+                            <Text style={styles.infoValue}>{PLATFORM_NAME}</Text>
                         </View>
                         <View style={styles.infoRow}>
                             <Text style={styles.infoLabel}>System:</Text>
@@ -183,7 +184,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                         </View>
                         <View style={styles.infoRow}>
                             <Text style={styles.infoLabel}>React Native:</Text>
-                            <Text style={styles.infoValue}>0.72.0</Text>
+                            <Text style={styles.infoValue}>{REACT_NATIVE_VERSION}</Text>
                         </View>
                     </View>
                 </View>

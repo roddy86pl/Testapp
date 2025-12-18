@@ -49,7 +49,18 @@ import {
 
 const { DeviceInfo } = NativeModules;
 
-type Screen = 'login' | 'home' | 'livetv' | 'movies' | 'series' | 'episodes' | 'moviedetails' | 'seriesdetails' | 'account' | 'settings' | 'player';
+type Screen = 
+    | 'login' 
+    | 'home' 
+    | 'livetv' 
+    | 'movies' 
+    | 'series' 
+    | 'episodes' 
+    | 'moviedetails' 
+    | 'seriesdetails' 
+    | 'account' 
+    | 'settings' 
+    | 'player';
 
 export const App: React.FC = () => {
     const [currentScreen, setCurrentScreen] = useState<Screen>('login');

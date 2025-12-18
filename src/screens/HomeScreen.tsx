@@ -37,13 +37,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     onNavigateAccount,
     onNavigateSettings,
 }) => {
-    moviesCount,
-    seriesCount,
-    onNavigateLiveTV,
-    onNavigateMovies,
-    onNavigateSeries,
-    onNavigateAccount,
-}) => {
     const currentTime = new Date().toLocaleTimeString('pl-PL', {
         hour: '2-digit',
         minute: '2-digit',
