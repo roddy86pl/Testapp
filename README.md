@@ -1,14 +1,22 @@
 # TestApp - React Native for Amazon Vega OS/Kepler
 
-A React Native application optimized for Amazon Fire TV devices running Vega OS (Kepler runtime). This is a starter template designed specifically for Linux-based TV environments.
+A React Native application optimized for Amazon Fire TV devices running Vega OS (Kepler runtime). This application uses WebView to display an HTML/JavaScript-based IPTV player.
+
+## Architecture
+
+This app uses a **hybrid architecture**:
+- **React Native (Vega OS/Kepler)**: Native wrapper that provides WebView and handles TV remote events
+- **HTML/JavaScript**: The main application logic in `index.html`, `scripts.js`, and `styles.css`
+- **WebView Bridge**: Communication layer between React Native and the web application
 
 ## Features
 
 - ✅ **Vega OS/Kepler Compatible**: Built for Amazon Fire TV Stick and similar devices
-- ✅ **TV-Optimized UI**: Large fonts and layouts designed for 10-foot viewing
+- ✅ **IPTV Player**: Full-featured streaming application with HLS.js support
+- ✅ **TV-Optimized UI**: Interface designed for 10-foot viewing
 - ✅ **Remote Control Support**: Full D-PAD navigation and Fire TV remote compatibility
+- ✅ **WebView Bridge**: Device information and event handling between native and web layers
 - ✅ **Landscape Orientation**: Locked to landscape mode for TV displays
-- ✅ **React Native 0.72**: Modern React Native with TypeScript support
 
 ## System Requirements
 
@@ -24,16 +32,40 @@ A React Native application optimized for Amazon Fire TV devices running Vega OS 
 ```
 Testapp/
 ├── src/
-│   └── App.tsx          # Main application component
-├── assets/              # Images and resources
-├── index.js             # Entry point
-├── app.json             # App configuration
-├── manifest.toml        # Vega OS manifest
-├── package.json         # Dependencies
-├── tsconfig.json        # TypeScript config
-├── metro.config.js      # Metro bundler config
-└── babel.config.js      # Babel config
+│   └── App.tsx              # React Native WebView wrapper
+├── assets/
+│   └── web/
+│       ├── index.html       # Main HTML application
+│       ├── scripts.js       # Application logic (IPTV player)
+│       └── styles.css       # Styling
+├── index.js                 # React Native entry point
+├── app.json                 # App configuration
+├── manifest.toml            # Vega OS manifest
+├── package.json             # Dependencies
+├── tsconfig.json            # TypeScript config
+├── metro.config.js          # Metro bundler config
+└── babel.config.js          # Babel config
 ```
+
+## How It Works
+
+1. **React Native Layer** (`src/App.tsx`):
+   - Loads WebView component from `@amazon-devices/webview`
+   - Handles Fire TV remote events (D-PAD, Back button)
+   - Generates device code
+   - Injects JavaScript bridge into WebView
+   - Communicates with HTML app via `postMessage`
+
+2. **Web Application Layer** (`assets/web/`):
+   - `index.html`: UI structure and layout
+   - `scripts.js`: IPTV player logic, HLS.js integration, navigation
+   - `styles.css`: TV-optimized styling
+   - Receives TV events from React Native
+   - Sends messages back to native layer
+
+3. **Bridge Communication**:
+   - React Native → WebView: Device info, TV events, back button
+   - WebView → React Native: Navigation state, exit requests, logs
 
 ## Getting Started
 
@@ -81,20 +113,22 @@ Use Vega Studio to deploy the built application to your Fire TV device.
 
 ## Application Features
 
-### Welcome Screen
+### IPTV Player
 
-The app displays a welcome screen with:
-- Application title and branding
-- Platform information (Vega OS/Kepler)
-- React Native version
-- Navigation instructions
+The web application (`assets/web/`) includes:
+- Device code registration
+- IPTV server configuration
+- Live TV channels with categories
+- Video-on-Demand (VOD) movies and series
+- HLS.js video player
+- D-PAD navigation optimized for TV remotes
 
 ### Fire TV Remote Support
 
 - **D-PAD Navigation**: Up, Down, Left, Right arrows
 - **Select**: OK/Center button
 - **Back**: Returns to previous screen or exits app
-- **Home**: Returns to Fire TV home screen
+- **Media Controls**: Play, Pause, Fast Forward, Rewind (if supported)
 
 ## Development in VS Code
 
@@ -106,54 +140,73 @@ Recommended VS Code extensions:
 
 ## Customization
 
-### Changing Colors
+### Modifying the Web Application
 
-Edit `src/App.tsx` and modify the `styles` object:
+Edit files in `assets/web/`:
+- `index.html`: Change UI structure
+- `scripts.js`: Modify application logic
+- `styles.css`: Update styling
 
+### Changing WebView Behavior
+
+Edit `src/App.tsx`:
+- Modify injected JavaScript bridge
+- Update message handlers
+- Change device code generation
+
+### Adding Native Features
+
+Extend `src/App.tsx` with additional React Native modules:
 ```typescript
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#0d1117', // Change background color
-    },
-    title: {
-        color: '#58a6ff', // Change title color
-    },
-    // ... other styles
+import { SomeNativeModule } from '@amazon-devices/some-module';
+```
+
+## WebView Bridge API
+
+### Messages from React Native to WebView
+
+```javascript
+// In WebView (scripts.js)
+window.addEventListener('message', function(event) {
+    const data = JSON.parse(event.data);
+    if (data.type === 'DEVICE_INFO') {
+        // Device information received
+        console.log(data.deviceCode, data.platform, data.brand);
+    }
+    if (data.type === 'TV_EVENT') {
+        // TV remote event received
+        console.log(data.eventType); // 'up', 'down', 'left', 'right', 'select'
+    }
 });
 ```
 
-### Adding New Screens
+### Messages from WebView to React Native
 
-Create new components in the `src/` directory and import them in `App.tsx`.
-
-### Modifying TV Behavior
-
-TV event handling is in `App.tsx`:
-
-```typescript
-useEffect(() => {
-    const tvEventHandler = new TVEventHandler();
-    
-    tvEventHandler.enable(undefined, (cmp, evt) => {
-        if (evt && evt.eventType) {
-            // Handle TV events here
-            console.log('TV Event:', evt.eventType);
-        }
-    });
-
-    return () => tvEventHandler.disable();
-}, []);
+```javascript
+// In WebView (scripts.js)
+if (window.ReactNativeWebView) {
+    window.ReactNativeWebView.postMessage(JSON.stringify({
+        type: 'EXIT_APP'
+    }));
+}
 ```
 
 ## Troubleshooting
 
+### WebView doesn't load
+- Verify files are in `assets/web/` directory
+- Check that `file:///android_asset/web/index.html` path is correct
+- Enable debug mode to see console logs
+
+### Remote control not working
+- Ensure `TVEventHandler` is enabled in App.tsx
+- Check that key events are being forwarded to WebView
+- Verify JavaScript bridge is injected properly
+
 ### Build fails
 - Ensure Node.js version is 18 or higher
 - Run `npm run clean` and reinstall dependencies
-
-### App doesn't start on Fire TV
-- Check that the manifest.toml is correctly configured
-- Verify the app is signed properly in Vega Studio
+- Check that all Vega OS dependencies are installed
 
 ## Platform Compatibility
 
@@ -173,4 +226,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Please ensure any changes maintain compatibility with Vega OS/Kepler runtime.
+Contributions are welcome! Please ensure any changes maintain compatibility with Vega OS/Kepler runtime and the WebView bridge architecture.
