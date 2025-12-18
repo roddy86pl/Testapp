@@ -1,18 +1,4 @@
 {
-  "name": "testapp",
-  "displayName": "TestApp",
-  "version": "1.0.0",
-  "description": "React Native Application for Amazon Vega OS/Kepler",
-  "expo": {
-    "name": "TestApp",
-    "slug": "testapp",
-    "version": "1.0.0",
-    "orientation": "landscape",
-    "icon": "./assets/images/icon.png",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#0d1117"
-    }
-  }
+  "name": "com.testapp.vegaos.main",
+  "displayName": "TestApp"
 }

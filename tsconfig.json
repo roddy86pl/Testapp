@@ -1,19 +1,29 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
+    /* Basic Options */
     "target": "esnext",
     "module": "commonjs",
-    "lib": ["es2019"],
+    "lib": ["es2017"],
     "allowJs": true,
-    "jsx": "react-native",
+    "jsx": "react",
     "noEmit": true,
     "isolatedModules": true,
+
+    /* Strict Type-Checking Options */
     "strict": true,
+    "noImplicitAny": false,
+
+    /* Module Resolution Options */
     "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"]
@@ -21,7 +31,9 @@
   },
   "include": [
     "src/**/*",
-    "index.js"
+    "index.js",
+    "service.js",
+    "task.js"
   ],
   "exclude": [
     "node_modules",
