@@ -1,16 +1,16 @@
 /**
- * PolFun Box - Entry Point for Vega OS
- * IPTV Player Application
+ * React Native Entry Point for Vega OS
+ * Amazon Fire TV Application
  */
 
 import { AppRegistry } from 'react-native';
 import { App } from './src/App';
 import { name as appName } from './app.json';
 
-// Rejestracja głównego komponentu aplikacji
+// Register main application component
 AppRegistry.registerComponent(appName, () => App);
 
-// Dla Vega OS - dodatkowa rejestracja
+// For Vega OS - additional registration
 if (typeof global.registerComponent === 'function') {
     global.registerComponent(appName, () => App);
 }

@@ -1,7 +1,7 @@
 {
-  "name": "polfunbox",
+  "name": "testapp",
   "version": "1.0.0",
-  "description": "PolFun Box - IPTV Player for Amazon Vega OS",
+  "description": "React Native Application for Amazon Vega OS/Kepler",
   "main": "index.js",
   "scripts": {
     "start": "react-native start",
@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@amazon-devices/react-native-kepler": "~2.0.0",
-    "@amazon-devices/webview": "^3.3.0",
     "react": "18.2.0",
     "react-native": "0.72.0"
   },
@@ -37,18 +36,14 @@
   "engines": {
     "node": ">=18"
   },
-  "author": "PolFun Team <support@polfun.de>",
+  "author": "",
   "license": "MIT",
-  "homepage": "https://polfun.de",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/polfun/polfunbox-vega"
-  },
   "keywords": [
-    "iptv",
-    "vega",
+    "react-native",
+    "vega-os",
+    "kepler",
     "firetv",
-    "streaming",
+    "amazon",
     "tv"
   ]
 }

@@ -1,115 +1,68 @@
 # ============================================================================
-# POLFUN BOX - MANIFEST VEGA OS
-# Aplikacja IPTV dla Amazon Fire TV Stick (Vega OS / Kepler)
+# TESTAPP - MANIFEST VEGA OS
+# React Native Application for Amazon Fire TV Stick (Vega OS / Kepler)
 # ============================================================================
 
 [package]
-name = "PolFunBox"
-id = "com.polfun.polfunbox"
+name = "TestApp"
+id = "com.testapp.vegaos"
 version = "1.0.0"
-description = "IPTV Player - Telewizja na żywo, Filmy i Seriale"
-author = "PolFun Team"
+description = "React Native Application for Amazon Vega OS/Kepler"
+author = "TestApp Team"
 icon = "assets/images/icon.png"
 
 # ============================================================================
-# KOMPONENTY APLIKACJI
+# COMPONENTS
 # ============================================================================
 
 [[components.interactive]]
-id = "com.polfun.polfunbox.main"
-name = "PolFunBox"
+id = "com.testapp.vegaos.main"
+name = "TestApp"
 entry = "index"
 icon = "assets/images/icon.png"
 
-# Runtime module dla React Native
+# Runtime module for React Native
 runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
 
-# Opcje uruchomienia
+# Launch options
 [components.interactive.launch-options]
 splash-screen = "assets/images/splash.png"
 
 # ============================================================================
-# WYMAGANE USŁUGI (needs) - aplikacja nie uruchomi się bez nich
+# REQUIRED SERVICES (needs) - app won't start without these
 # ============================================================================
 
 [needs]
 
-# Dostęp do internetu - WYMAGANE dla IPTV
+# Internet access
 [[needs.privilege]]
 id = "com.amazon.privilege.network.client"
 
 # ============================================================================
-# OPCJONALNE USŁUGI (wants) - aplikacja może działać bez nich
+# OPTIONAL SERVICES (wants) - app can run without these
 # ============================================================================
 
 [wants]
 
-# === ODTWARZANIE WIDEO ===
-[[wants.service]]
-id = "com.amazon.media.server"
-
-[[wants.service]]
-id = "com.amazon.mediametrics.service"
-
-[[wants.service]]
-id = "com.amazon.mediabuffer.service"
-
-[[wants.service]]
-id = "com.amazon.mediatransform.service"
-
-# === ODTWARZANIE AUDIO ===
-[[wants.service]]
-id = "com.amazon.audio.stream"
-
-[[wants.service]]
-id = "com.amazon.audio.control"
-
-# === DRM (Digital Rights Management) - dla chronionych treści ===
-[[wants.service]]
-id = "com.amazon.drm.key"
-
-[[wants.service]]
-id = "com.amazon.drm.crypto"
-
-[[wants.privilege]]
-id = "com.amazon.privilege.security.file-sharing"
-
-# === DOSTĘPNOŚĆ (Accessibility) ===
-[[wants.service]]
-id = "com.amazon.kepler.ucc.publisher"
-
-# === GROUP-IPC dla usług medialnych ===
-[[wants.service]]
-id = "com.amazon.gipc.uuid.*"
-
-# === INFORMACJE O URZĄDZENIU ===
+# Device information
 [[wants.service]]
 id = "com.amazon.device.info"
 
-# === PRZECHOWYWANIE DANYCH ===
+# Data storage
 [[wants.privilege]]
 id = "com.amazon.privilege.filesystem.scratch.readwrite"
 
 # ============================================================================
-# OFEROWANE USŁUGI (offers)
-# ============================================================================
-
-[offers]
-
-[[offers.service]]
-id = "com.amazon.gipc.uuid.*"
-
-# ============================================================================
-# DODATKOWE KONFIGURACJE
+# ADDITIONAL CONFIGURATION
 # ============================================================================
 
 [extras]
 
-# Wyłączenie rotacji ekranu - TV zawsze landscape
+# Disable screen rotation - TV is always landscape
 screen-orientation = "landscape"
 
-# Wsparcie dla pilota TV
+# TV input support
 tv-input = true
 
-# Wyświetlanie na pełnym ekranie
+# Fullscreen display
 fullscreen = true
