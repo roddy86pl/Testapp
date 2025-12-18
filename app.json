@@ -1,11 +1,11 @@
 {
-  "name": "polfunbox",
-  "displayName": "PolFunBox",
+  "name": "testapp",
+  "displayName": "TestApp",
   "version": "1.0.0",
-  "description": "IPTV Player for Amazon Vega OS",
+  "description": "React Native Application for Amazon Vega OS/Kepler",
   "expo": {
-    "name": "PolFunBox",
-    "slug": "polfunbox",
+    "name": "TestApp",
+    "slug": "testapp",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/images/icon.png",
