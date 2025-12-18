@@ -8,6 +8,9 @@ yarn-error.log*
 build/
 kepler-build/
 dist/
+bundle/
+generated/
+coverage/
 *.apk
 *.ipa
 
