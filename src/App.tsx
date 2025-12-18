@@ -17,8 +17,7 @@ import {
     Text,
     StyleSheet, 
     BackHandler,
-    TVEventHandler,
-    Platform
+    TVEventHandler
 } from 'react-native';
 
 export const App: React.FC = () => {
