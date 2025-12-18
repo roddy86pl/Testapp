@@ -18,7 +18,6 @@ import {
   View,
   StyleSheet,
   BackHandler,
-  TVEventHandler,
   NativeModules,
   Alert,
 } from "react-native";
@@ -168,19 +167,6 @@ export const App: React.FC = () => {
 
     return () => backHandler.remove();
   }, [currentScreen]);
-
-  // Handle TV D-PAD events
-  useEffect(() => {
-    const tvEventHandler = new TVEventHandler();
-
-    tvEventHandler.enable(undefined, (cmp, evt) => {
-      if (evt && evt.eventType) {
-        console.log("TV Event:", evt.eventType);
-      }
-    });
-
-    return () => tvEventHandler.disable();
-  }, []);
 
   // Load all categories when logged in
   const loadAllCategories = useCallback(async (api: IPTVApi) => {

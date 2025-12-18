@@ -171,7 +171,7 @@ export class IPTVApi {
    * Get live TV streams
    */
   async getLiveStreams(categoryId?: string): Promise<LiveChannel[]> {
-    const params = categoryId ? { category_id: categoryId } : {};
+    const params = categoryId ? { category_id: categoryId } : undefined;
     const url = this.buildUrl("get_live_streams", params);
     const response = await fetch(url);
 
@@ -200,7 +200,7 @@ export class IPTVApi {
    * Get VOD streams (movies)
    */
   async getVodStreams(categoryId?: string): Promise<VodMovie[]> {
-    const params = categoryId ? { category_id: categoryId } : {};
+    const params = categoryId ? { category_id: categoryId } : undefined;
     const url = this.buildUrl("get_vod_streams", params);
     const response = await fetch(url);
 
@@ -231,7 +231,7 @@ export class IPTVApi {
    * Get series list
    */
   async getSeries(categoryId?: string): Promise<SeriesInfo[]> {
-    const params = categoryId ? { category_id: categoryId } : {};
+    const params = categoryId ? { category_id: categoryId } : undefined;
     const url = this.buildUrl("get_series", params);
     const response = await fetch(url);
 
