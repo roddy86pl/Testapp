@@ -1,22 +1,24 @@
-# TestApp - React Native for Amazon Vega OS/Kepler
+# TestApp - Native React Native for Amazon Vega OS/Kepler
 
-A React Native application optimized for Amazon Fire TV devices running Vega OS (Kepler runtime). This application uses WebView to display an HTML/JavaScript-based IPTV player.
+A fully native React Native IPTV application optimized for Amazon Fire TV devices running Vega OS (Kepler runtime). Built entirely with React Native components - no WebView.
 
 ## Architecture
 
-This app uses a **hybrid architecture**:
-- **React Native (Vega OS/Kepler)**: Native wrapper that provides WebView and handles TV remote events
-- **HTML/JavaScript**: The main application logic in `index.html`, `scripts.js`, and `styles.css`
-- **WebView Bridge**: Communication layer between React Native and the web application
+This is a **100% native React Native application**:
+- Pure React Native components (no HTML/CSS/JavaScript web files)
+- Native Fire TV remote control handling
+- Optimized for TV displays (10-foot UI)
+- TypeScript for type safety
 
 ## Features
 
 - ✅ **Vega OS/Kepler Compatible**: Built for Amazon Fire TV Stick and similar devices
-- ✅ **IPTV Player**: Full-featured streaming application with HLS.js support
-- ✅ **TV-Optimized UI**: Interface designed for 10-foot viewing
+- ✅ **Native IPTV Player**: Login, Live TV, Movies, Series
+- ✅ **TV-Optimized UI**: Large fonts and touch targets for TV viewing
 - ✅ **Remote Control Support**: Full D-PAD navigation and Fire TV remote compatibility
-- ✅ **WebView Bridge**: Device information and event handling between native and web layers
+- ✅ **Device Code Authentication**: Unique code generation for easy login
 - ✅ **Landscape Orientation**: Locked to landscape mode for TV displays
+- ✅ **React Native 0.72**: Modern React Native with TypeScript
 
 ## System Requirements
 
@@ -32,40 +34,35 @@ This app uses a **hybrid architecture**:
 ```
 Testapp/
 ├── src/
-│   └── App.tsx              # React Native WebView wrapper
-├── assets/
-│   └── web/
-│       ├── index.html       # Main HTML application
-│       ├── scripts.js       # Application logic (IPTV player)
-│       └── styles.css       # Styling
-├── index.js                 # React Native entry point
-├── app.json                 # App configuration
-├── manifest.toml            # Vega OS manifest
-├── package.json             # Dependencies
-├── tsconfig.json            # TypeScript config
-├── metro.config.js          # Metro bundler config
-└── babel.config.js          # Babel config
+│   ├── App.tsx                  # Main app component with navigation
+│   ├── screens/
+│   │   ├── LoginScreen.tsx      # Login with device code / form
+│   │   └── HomeScreen.tsx       # Main menu (Live TV, Movies, Series)
+│   └── utils/
+│       └── deviceCode.ts        # Device code generation
+├── index.js                     # React Native entry point
+├── app.json                     # App configuration
+├── manifest.toml                # Vega OS manifest
+├── package.json                 # Dependencies
+├── tsconfig.json                # TypeScript config
+├── metro.config.js              # Metro bundler config
+└── babel.config.js              # Babel config
 ```
 
-## How It Works
+## Screens
 
-1. **React Native Layer** (`src/App.tsx`):
-   - Loads WebView component from `@amazon-devices/webview`
-   - Handles Fire TV remote events (D-PAD, Back button)
-   - Generates device code
-   - Injects JavaScript bridge into WebView
-   - Communicates with HTML app via `postMessage`
+### 1. Login Screen
+- **Device Code Display**: Shows unique 8-character code
+- **Device Login**: One-click login using device code
+- **Manual Registration**: Form for server URL, username, password
+- **TV Navigation**: Fully navigable with Fire TV remote
 
-2. **Web Application Layer** (`assets/web/`):
-   - `index.html`: UI structure and layout
-   - `scripts.js`: IPTV player logic, HLS.js integration, navigation
-   - `styles.css`: TV-optimized styling
-   - Receives TV events from React Native
-   - Sends messages back to native layer
-
-3. **Bridge Communication**:
-   - React Native → WebView: Device info, TV events, back button
-   - WebView → React Native: Navigation state, exit requests, logs
+### 2. Home Screen
+- **Header**: Clock, app logo, user info, expiry date
+- **Live TV Card**: Large card with channel count
+- **Movies Card**: Navigate to movies library
+- **Series Card**: Navigate to series library
+- **Account Card**: User settings and information
 
 ## Getting Started
 
@@ -113,22 +110,28 @@ Use Vega Studio to deploy the built application to your Fire TV device.
 
 ## Application Features
 
-### IPTV Player
+### Device Code Authentication
 
-The web application (`assets/web/`) includes:
-- Device code registration
-- IPTV server configuration
-- Live TV channels with categories
-- Video-on-Demand (VOD) movies and series
-- HLS.js video player
-- D-PAD navigation optimized for TV remotes
+The app generates a unique 8-character device code that can be used for authentication:
+- Code is based on device's unique ID (or random if unavailable)
+- Displayed on login screen
+- Used for pairing with IPTV service
 
 ### Fire TV Remote Support
 
 - **D-PAD Navigation**: Up, Down, Left, Right arrows
-- **Select**: OK/Center button
-- **Back**: Returns to previous screen or exits app
-- **Media Controls**: Play, Pause, Fast Forward, Rewind (if supported)
+- **Select**: OK/Center button to activate buttons
+- **Back**: Returns to previous screen or shows exit confirmation
+- **hasTVPreferredFocus**: Primary button gets initial focus
+
+### TV-Optimized UI
+
+All components are designed for 10-foot viewing:
+- Large fonts (24px - 80px)
+- High contrast colors
+- Sufficient touch targets
+- Focus indicators
+- Landscape orientation only
 
 ## Development in VS Code
 
@@ -140,73 +143,89 @@ Recommended VS Code extensions:
 
 ## Customization
 
-### Modifying the Web Application
+### Adding New Screens
 
-Edit files in `assets/web/`:
-- `index.html`: Change UI structure
-- `scripts.js`: Modify application logic
-- `styles.css`: Update styling
+Create new screen components in `src/screens/`:
 
-### Changing WebView Behavior
-
-Edit `src/App.tsx`:
-- Modify injected JavaScript bridge
-- Update message handlers
-- Change device code generation
-
-### Adding Native Features
-
-Extend `src/App.tsx` with additional React Native modules:
 ```typescript
-import { SomeNativeModule } from '@amazon-devices/some-module';
-```
+// src/screens/LiveTVScreen.tsx
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-## WebView Bridge API
+export const LiveTVScreen: React.FC = () => {
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Live TV Channels</Text>
+        </View>
+    );
+};
 
-### Messages from React Native to WebView
-
-```javascript
-// In WebView (scripts.js)
-window.addEventListener('message', function(event) {
-    const data = JSON.parse(event.data);
-    if (data.type === 'DEVICE_INFO') {
-        // Device information received
-        console.log(data.deviceCode, data.platform, data.brand);
-    }
-    if (data.type === 'TV_EVENT') {
-        // TV remote event received
-        console.log(data.eventType); // 'up', 'down', 'left', 'right', 'select'
-    }
+const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor: '#0d1117' },
+    title: { fontSize: 48, color: '#fff' },
 });
 ```
 
-### Messages from WebView to React Native
+### Modifying Colors
 
-```javascript
-// In WebView (scripts.js)
-if (window.ReactNativeWebView) {
-    window.ReactNativeWebView.postMessage(JSON.stringify({
-        type: 'EXIT_APP'
-    }));
+Edit component StyleSheets:
+```typescript
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#0d1117', // Dark background
+    },
+    title: {
+        color: '#58a6ff', // Blue accent
+    },
+});
+```
+
+### Adding API Integration
+
+Create service files in `src/services/`:
+
+```typescript
+// src/services/iptvApi.ts
+export async function loginWithDeviceCode(code: string) {
+    const response = await fetch('https://api.example.com/device/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deviceCode: code }),
+    });
+    return response.json();
 }
+```
+
+## Navigation Flow
+
+```
+LoginScreen
+    ├─ Device Login Button → API Call → HomeScreen
+    └─ Manual Registration Form → API Call → HomeScreen
+
+HomeScreen
+    ├─ Live TV Card → LiveTVScreen (TODO)
+    ├─ Movies Card → MoviesScreen (TODO)
+    ├─ Series Card → SeriesScreen (TODO)
+    └─ Account Card → AccountScreen (TODO)
 ```
 
 ## Troubleshooting
 
-### WebView doesn't load
-- Verify files are in `assets/web/` directory
-- Check that `file:///android_asset/web/index.html` path is correct
-- Enable debug mode to see console logs
-
-### Remote control not working
-- Ensure `TVEventHandler` is enabled in App.tsx
-- Check that key events are being forwarded to WebView
-- Verify JavaScript bridge is injected properly
+### Buttons not focusable
+- Ensure `hasTVPreferredFocus={true}` is set on primary button
+- Use `TouchableOpacity` instead of `TouchableHighlight` for better TV support
+- Add `accessible={true}` to focusable components
 
 ### Build fails
 - Ensure Node.js version is 18 or higher
 - Run `npm run clean` and reinstall dependencies
-- Check that all Vega OS dependencies are installed
+- Check that all dependencies are compatible with React Native 0.72
+
+### App doesn't start on Fire TV
+- Check that `manifest.toml` is correctly configured
+- Verify landscape orientation is set
+- Ensure TV input is enabled in manifest
 
 ## Platform Compatibility
 
@@ -214,11 +233,45 @@ if (window.ReactNativeWebView) {
 |----------|---------|
 | Amazon Vega OS/Kepler | ✅ Yes |
 | Amazon Fire TV | ✅ Yes |
-| Android TV | ❌ No |
+| Android TV | ❌ No* |
 | Web | ❌ No |
 | Android Mobile | ❌ No |
 
-This application is **specifically designed for Amazon Vega OS** and Fire TV devices, not for general Android or web platforms.
+*While React Native code could work on Android TV, this app is specifically configured for Vega OS/Kepler runtime.
+
+## Technology Stack
+
+- **Framework**: React Native 0.72.0
+- **Language**: TypeScript
+- **UI**: Native React Native components (View, Text, TextInput, TouchableOpacity)
+- **Navigation**: State-based screen switching
+- **Remote Control**: TVEventHandler from React Native
+- **Build**: Metro bundler, Babel
+- **Deployment**: Vega Studio
+
+## Next Steps
+
+To complete the IPTV functionality:
+
+1. **API Integration**:
+   - Implement actual API calls in login handlers
+   - Add services for fetching channels, movies, series
+
+2. **Additional Screens**:
+   - LiveTVScreen with channel list
+   - PlayerScreen for video playback
+   - MoviesScreen with VOD library
+   - SeriesScreen with episodes
+
+3. **Video Player**:
+   - Integrate video player component
+   - Add HLS/DASH stream support
+   - Implement playback controls
+
+4. **Persistence**:
+   - Add AsyncStorage for login state
+   - Cache user preferences
+   - Remember last watched content
 
 ## License
 
@@ -226,4 +279,4 @@ MIT
 
 ## Contributing
 
-Contributions are welcome! Please ensure any changes maintain compatibility with Vega OS/Kepler runtime and the WebView bridge architecture.
+Contributions are welcome! Please ensure any changes maintain compatibility with Vega OS/Kepler runtime and follow the native React Native architecture (no WebView).
