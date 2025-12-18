@@ -28,6 +28,11 @@ import { LiveTVScreen } from './screens/LiveTVScreen';
 import { MoviesScreen } from './screens/MoviesScreen';
 import { SeriesScreen } from './screens/SeriesScreen';
 import { EpisodesScreen } from './screens/EpisodesScreen';
+import { MovieDetailsScreen } from './screens/MovieDetailsScreen';
+import { SeriesDetailsScreen } from './screens/SeriesDetailsScreen';
+import { AccountScreen } from './screens/AccountScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
+import { PlayerScreen } from './screens/PlayerScreen';
 import { hashToDeviceCode, generateFallbackCode } from './utils/deviceCode';
 import { 
     IPTVApi, 
@@ -39,11 +44,12 @@ import {
     SeriesCategory,
     SeriesInfo,
     Episode,
+    UserInfo,
 } from './services/iptvApi';
 
 const { DeviceInfo } = NativeModules;
 
-type Screen = 'login' | 'home' | 'livetv' | 'movies' | 'series' | 'episodes';
+type Screen = 'login' | 'home' | 'livetv' | 'movies' | 'series' | 'episodes' | 'moviedetails' | 'seriesdetails' | 'account' | 'settings' | 'player';
 
 export const App: React.FC = () => {
     const [currentScreen, setCurrentScreen] = useState<Screen>('login');
@@ -58,6 +64,7 @@ export const App: React.FC = () => {
     const [password, setPassword] = useState('');
     const [serverUrl, setServerUrl] = useState('');
     const [userExpiry, setUserExpiry] = useState('');
+    const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
     
     // Live TV
     const [liveCategories, setLiveCategories] = useState<LiveCategory[]>([]);
@@ -68,6 +75,7 @@ export const App: React.FC = () => {
     const [vodCategories, setVodCategories] = useState<VodCategory[]>([]);
     const [vodMovies, setVodMovies] = useState<VodMovie[]>([]);
     const [moviesLoading, setMoviesLoading] = useState(false);
+    const [selectedMovie, setSelectedMovie] = useState<VodMovie | null>(null);
     
     // Series
     const [seriesCategories, setSeriesCategories] = useState<SeriesCategory[]>([]);
@@ -78,6 +86,10 @@ export const App: React.FC = () => {
     const [selectedSeries, setSelectedSeries] = useState<SeriesInfo | null>(null);
     const [episodes, setEpisodes] = useState<Record<string, Episode[]>>({});
     const [episodesLoading, setEpisodesLoading] = useState(false);
+    
+    // Player
+    const [playerStreamUrl, setPlayerStreamUrl] = useState('');
+    const [playerTitle, setPlayerTitle] = useState('');
 
     // Generate device code on mount
     useEffect(() => {
@@ -105,8 +117,20 @@ export const App: React.FC = () => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
-                if (currentScreen === 'episodes') {
+                if (currentScreen === 'player') {
+                    // Player screen handles its own back button
+                    return false;
+                } else if (currentScreen === 'episodes') {
+                    setCurrentScreen('seriesdetails');
+                    return true;
+                } else if (currentScreen === 'moviedetails') {
+                    setCurrentScreen('movies');
+                    return true;
+                } else if (currentScreen === 'seriesdetails') {
                     setCurrentScreen('series');
+                    return true;
+                } else if (currentScreen === 'account' || currentScreen === 'settings') {
+                    setCurrentScreen('home');
                     return true;
                 } else if (currentScreen === 'livetv' || currentScreen === 'movies' || currentScreen === 'series') {
                     setCurrentScreen('home');
@@ -178,6 +202,7 @@ export const App: React.FC = () => {
             setServerUrl(result.serverUrl);
             setUsername(result.username);
             setPassword(result.password);
+            setUserInfo(userInfo);
             setUserExpiry(`Ważne do: ${userInfo.exp_date}`);
             setIsLoggedIn(true);
             
@@ -216,6 +241,7 @@ export const App: React.FC = () => {
             setServerUrl(url);
             setUsername(user);
             setPassword(pass);
+            setUserInfo(userInfo);
             setUserExpiry(`Ważne do: ${userInfo.exp_date}`);
             setIsLoggedIn(true);
             
@@ -277,13 +303,6 @@ export const App: React.FC = () => {
         }
     }, [iptvApi]);
 
-    const handleSelectChannel = useCallback((channel: LiveChannel) => {
-        if (!iptvApi) return;
-        const streamUrl = iptvApi.getLiveStreamUrl(channel.stream_id, channel.stream_type);
-        Alert.alert('Kanał', `Odtwarzanie: ${channel.name}\n${streamUrl}`);
-        // TODO: Implement video player
-    }, [iptvApi]);
-
     const handleNavigateMovies = useCallback(async () => {
         setCurrentScreen('movies');
         
@@ -319,10 +338,16 @@ export const App: React.FC = () => {
     }, [iptvApi]);
 
     const handleSelectMovie = useCallback((movie: VodMovie) => {
+        setSelectedMovie(movie);
+        setCurrentScreen('moviedetails');
+    }, []);
+
+    const handlePlayMovie = useCallback((movie: VodMovie) => {
         if (!iptvApi) return;
         const streamUrl = iptvApi.getVodStreamUrl(movie.stream_id, movie.container_extension);
-        Alert.alert('Film', `Odtwarzanie: ${movie.name}\n${streamUrl}`);
-        // TODO: Implement video player
+        setPlayerStreamUrl(streamUrl);
+        setPlayerTitle(movie.name);
+        setCurrentScreen('player');
     }, [iptvApi]);
 
     const handleNavigateSeries = useCallback(async () => {
@@ -359,7 +384,12 @@ export const App: React.FC = () => {
         }
     }, [iptvApi]);
 
-    const handleSelectSeries = useCallback(async (series: SeriesInfo) => {
+    const handleSelectSeries = useCallback((series: SeriesInfo) => {
+        setSelectedSeries(series);
+        setCurrentScreen('seriesdetails');
+    }, []);
+
+    const handleViewEpisodes = useCallback(async (series: SeriesInfo) => {
         if (!iptvApi) return;
         
         setSelectedSeries(series);
@@ -380,13 +410,54 @@ export const App: React.FC = () => {
     const handleSelectEpisode = useCallback((episode: Episode) => {
         if (!iptvApi) return;
         const streamUrl = iptvApi.getSeriesStreamUrl(episode.id, episode.container_extension);
-        Alert.alert('Odcinek', `Odtwarzanie: ${episode.title}\n${streamUrl}`);
-        // TODO: Implement video player
+        setPlayerStreamUrl(streamUrl);
+        setPlayerTitle(episode.title);
+        setCurrentScreen('player');
+    }, [iptvApi]);
+
+    const handleSelectChannel = useCallback((channel: LiveChannel) => {
+        if (!iptvApi) return;
+        const streamUrl = iptvApi.getLiveStreamUrl(channel.stream_id, channel.stream_type);
+        setPlayerStreamUrl(streamUrl);
+        setPlayerTitle(channel.name);
+        setCurrentScreen('player');
     }, [iptvApi]);
 
     const handleNavigateAccount = useCallback(() => {
-        Alert.alert('Konto', `Użytkownik: ${username}\n${userExpiry}\nSerwer: ${serverUrl}`);
-    }, [username, userExpiry, serverUrl]);
+        setCurrentScreen('account');
+    }, []);
+
+    const handleNavigateSettings = useCallback(() => {
+        setCurrentScreen('settings');
+    }, []);
+
+    const handleLogout = useCallback(() => {
+        setIsLoggedIn(false);
+        setIptvApi(null);
+        setUserInfo(null);
+        setUsername('');
+        setPassword('');
+        setServerUrl('');
+        setUserExpiry('');
+        setLiveCategories([]);
+        setLiveChannels([]);
+        setVodCategories([]);
+        setVodMovies([]);
+        setSeriesCategories([]);
+        setSeriesList([]);
+        setSelectedSeries(null);
+        setEpisodes({});
+        setCurrentScreen('login');
+    }, []);
+
+    const handleClearCache = useCallback(() => {
+        // Clear cached data
+        setLiveChannels([]);
+        setVodMovies([]);
+        setSeriesList([]);
+        setEpisodes({});
+        console.log('Cache cleared');
+    }, []);
 
     const handleBackToHome = useCallback(() => {
         setCurrentScreen('home');
@@ -412,6 +483,7 @@ export const App: React.FC = () => {
                     onNavigateMovies={handleNavigateMovies}
                     onNavigateSeries={handleNavigateSeries}
                     onNavigateAccount={handleNavigateAccount}
+                    onNavigateSettings={handleNavigateSettings}
                 />
             )}
             {currentScreen === 'livetv' && (
@@ -449,8 +521,43 @@ export const App: React.FC = () => {
                     seriesInfo={selectedSeries}
                     episodes={episodes}
                     onSelectEpisode={handleSelectEpisode}
-                    onBack={() => setCurrentScreen('series')}
+                    onBack={() => setCurrentScreen('seriesdetails')}
                     loading={episodesLoading}
+                />
+            )}
+            {currentScreen === 'moviedetails' && selectedMovie && (
+                <MovieDetailsScreen
+                    movie={selectedMovie}
+                    onPlay={handlePlayMovie}
+                    onBack={() => setCurrentScreen('movies')}
+                />
+            )}
+            {currentScreen === 'seriesdetails' && selectedSeries && (
+                <SeriesDetailsScreen
+                    series={selectedSeries}
+                    onViewEpisodes={handleViewEpisodes}
+                    onBack={() => setCurrentScreen('series')}
+                />
+            )}
+            {currentScreen === 'account' && userInfo && (
+                <AccountScreen
+                    userInfo={userInfo}
+                    serverUrl={serverUrl}
+                    onLogout={handleLogout}
+                    onBack={handleBackToHome}
+                />
+            )}
+            {currentScreen === 'settings' && (
+                <SettingsScreen
+                    onBack={handleBackToHome}
+                    onClearCache={handleClearCache}
+                />
+            )}
+            {currentScreen === 'player' && (
+                <PlayerScreen
+                    streamUrl={playerStreamUrl}
+                    title={playerTitle}
+                    onBack={() => setCurrentScreen('home')}
                 />
             )}
         </View>

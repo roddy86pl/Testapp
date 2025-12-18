@@ -22,12 +22,21 @@ interface HomeScreenProps {
     onNavigateMovies: () => void;
     onNavigateSeries: () => void;
     onNavigateAccount: () => void;
+    onNavigateSettings?: () => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
     username,
     expiry,
     liveTvCount,
+    moviesCount,
+    seriesCount,
+    onNavigateLiveTV,
+    onNavigateMovies,
+    onNavigateSeries,
+    onNavigateAccount,
+    onNavigateSettings,
+}) => {
     moviesCount,
     seriesCount,
     onNavigateLiveTV,
@@ -103,8 +112,20 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                     >
                         <Text style={styles.cardIcon}>👤</Text>
                         <Text style={styles.cardTitle}>Konto</Text>
-                        <Text style={styles.cardCount}>Ustawienia</Text>
+                        <Text style={styles.cardCount}>Informacje</Text>
                     </TouchableOpacity>
+
+                    {/* Settings */}
+                    {onNavigateSettings && (
+                        <TouchableOpacity
+                            style={[styles.card, styles.cardSmall]}
+                            onPress={onNavigateSettings}
+                        >
+                            <Text style={styles.cardIcon}>⚙️</Text>
+                            <Text style={styles.cardTitle}>Ustawienia</Text>
+                            <Text style={styles.cardCount}>Konfiguracja</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </View>
         </View>
