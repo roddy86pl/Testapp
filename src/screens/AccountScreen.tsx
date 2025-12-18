@@ -27,13 +27,13 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
     onLogout,
     onBack,
 }) => {
-    const handleLogout = () => {
+    const handleExit = () => {
         Alert.alert(
-            'Wylogować?',
-            'Czy na pewno chcesz się wylogować?',
+            'Wyjść z aplikacji?',
+            'Czy na pewno chcesz opuścić aplikację?',
             [
                 { text: 'Anuluj', style: 'cancel' },
-                { text: 'Wyloguj', onPress: onLogout, style: 'destructive' },
+                { text: 'Wyjdź', onPress: onLogout, style: 'destructive' },
             ]
         );
     };
@@ -171,11 +171,11 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
                 {/* Action Buttons */}
                 <View style={styles.actionsContainer}>
                     <TouchableOpacity
-                        style={[styles.actionButton, styles.logoutButton]}
-                        onPress={handleLogout}
+                        style={[styles.actionButton, styles.exitButton]}
+                        onPress={handleExit}
                         hasTVPreferredFocus={true}
                     >
-                        <Text style={styles.actionButtonText}>🚪 Wyloguj się</Text>
+                        <Text style={styles.actionButtonText}>🚪 Wyjdź z aplikacji</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 2,
     },
-    logoutButton: {
+    exitButton: {
         backgroundColor: '#da3633',
         borderColor: '#f85149',
     },
