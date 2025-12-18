@@ -12,6 +12,7 @@ import {
     TouchableOpacity,
     Alert,
 } from 'react-native';
+import { APP_NAME, APP_SUBTITLE, APP_VERSION, PLATFORM_NAME } from '../utils/constants';
 
 interface LoginScreenProps {
     deviceCode: string;
@@ -68,8 +69,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                 </View>
 
                 {/* Title */}
-                <Text style={styles.title}>TestApp</Text>
-                <Text style={styles.subtitle}>Streaming IPTV dla Fire TV</Text>
+                <Text style={styles.title}>{APP_NAME}</Text>
+                <Text style={styles.subtitle}>{APP_SUBTITLE}</Text>
 
                 {/* Device Code */}
                 <View style={styles.deviceCodeBox}>
@@ -99,7 +100,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                     </Text>
                 </TouchableOpacity>
 
-                <Text style={styles.versionText}>v1.0.0 | Amazon Fire TV</Text>
+                <Text style={styles.versionText}>v{APP_VERSION} | {PLATFORM_NAME}</Text>
             </View>
 
             {showForm && (

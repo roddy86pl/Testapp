@@ -10,6 +10,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
+import { APP_NAME } from '../utils/constants';
 
 interface HomeScreenProps {
     username: string;
@@ -50,7 +51,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                         <Text style={styles.logoIconText}>▶</Text>
                     </View>
                     <Text style={styles.logoText}>
-                        TestApp <Text style={styles.logoBox}>Box</Text>
+                        {APP_NAME} <Text style={styles.logoBox}>Box</Text>
                     </Text>
                 </View>
 

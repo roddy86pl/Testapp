@@ -3,6 +3,11 @@
  * Generates unique device codes for IPTV authentication
  */
 
+// Constants for device code generation
+const DEVICE_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const DEVICE_CODE_LENGTH = 8;
+const HASH_MULTIPLIER = 7;
+
 /**
  * Generate device code from string input
  */
@@ -13,13 +18,12 @@ export function hashToDeviceCode(input: string): string {
         hash = hash & hash;
     }
     
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let code = '';
     let num = Math.abs(hash);
     
-    for (let j = 0; j < 8; j++) {
-        code += chars[num % chars.length];
-        num = Math.floor(num / chars.length) + (j * 7);
+    for (let j = 0; j < DEVICE_CODE_LENGTH; j++) {
+        code += DEVICE_CODE_CHARS[num % DEVICE_CODE_CHARS.length];
+        num = Math.floor(num / DEVICE_CODE_CHARS.length) + (j * HASH_MULTIPLIER);
     }
     
     return code;
@@ -29,10 +33,9 @@ export function hashToDeviceCode(input: string): string {
  * Generate random fallback device code
  */
 export function generateFallbackCode(): string {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let code = '';
-    for (let i = 0; i < 8; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
+    for (let i = 0; i < DEVICE_CODE_LENGTH; i++) {
+        code += DEVICE_CODE_CHARS[Math.floor(Math.random() * DEVICE_CODE_CHARS.length)];
     }
     return code;
 }
