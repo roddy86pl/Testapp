@@ -109,7 +109,7 @@ export class IPTVApi {
   private password: string;
 
   constructor(serverUrl: string, username: string, password: string) {
-    this.baseUrl = serverUrl.replace(/\/$/, ""); // Remove trailing slash
+    this.baseUrl = serverUrl.replace(/\/$/, ''); // Remove trailing slash
     this.username = username;
     this.password = password;
   }
@@ -135,7 +135,7 @@ export class IPTVApi {
    * Authenticate user and get account info
    */
   async authenticate(): Promise<UserInfo> {
-    const url = this.buildUrl("");
+    const url = this.buildUrl('');
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -145,7 +145,7 @@ export class IPTVApi {
     const data = await response.json();
 
     if (!data.user_info || data.user_info.auth !== 1) {
-      throw new Error("Invalid credentials");
+      throw new Error('Invalid credentials');
     }
 
     return data.user_info;
@@ -155,7 +155,7 @@ export class IPTVApi {
    * Get live TV categories
    */
   async getLiveCategories(): Promise<LiveCategory[]> {
-    const url = this.buildUrl("get_live_categories");
+    const url = this.buildUrl('get_live_categories');
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -172,7 +172,7 @@ export class IPTVApi {
    */
   async getLiveStreams(categoryId?: string): Promise<LiveChannel[]> {
     const params = categoryId ? { category_id: categoryId } : undefined;
-    const url = this.buildUrl("get_live_streams", params);
+    const url = this.buildUrl('get_live_streams', params);
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -186,7 +186,7 @@ export class IPTVApi {
    * Get VOD categories
    */
   async getVodCategories(): Promise<VodCategory[]> {
-    const url = this.buildUrl("get_vod_categories");
+    const url = this.buildUrl('get_vod_categories');
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -201,7 +201,7 @@ export class IPTVApi {
    */
   async getVodStreams(categoryId?: string): Promise<VodMovie[]> {
     const params = categoryId ? { category_id: categoryId } : undefined;
-    const url = this.buildUrl("get_vod_streams", params);
+    const url = this.buildUrl('get_vod_streams', params);
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -215,7 +215,7 @@ export class IPTVApi {
    * Get series categories
    */
   async getSeriesCategories(): Promise<SeriesCategory[]> {
-    const url = this.buildUrl("get_series_categories");
+    const url = this.buildUrl('get_series_categories');
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -232,7 +232,7 @@ export class IPTVApi {
    */
   async getSeries(categoryId?: string): Promise<SeriesInfo[]> {
     const params = categoryId ? { category_id: categoryId } : undefined;
-    const url = this.buildUrl("get_series", params);
+    const url = this.buildUrl('get_series', params);
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -248,7 +248,7 @@ export class IPTVApi {
   async getSeriesInfo(
     seriesId: number
   ): Promise<{ info: SeriesInfo; episodes: Record<string, Episode[]> }> {
-    const url = this.buildUrl("get_series_info", {
+    const url = this.buildUrl('get_series_info', {
       series_id: seriesId.toString(),
     });
     const response = await fetch(url);
@@ -263,21 +263,21 @@ export class IPTVApi {
   /**
    * Get live stream URL
    */
-  getLiveStreamUrl(streamId: number, extension: string = "ts"): string {
+  getLiveStreamUrl(streamId: number, extension: string = 'ts'): string {
     return `${this.baseUrl}/live/${this.username}/${this.password}/${streamId}.${extension}`;
   }
 
   /**
    * Get VOD stream URL
    */
-  getVodStreamUrl(streamId: number, extension: string = "mp4"): string {
+  getVodStreamUrl(streamId: number, extension: string = 'mp4'): string {
     return `${this.baseUrl}/movie/${this.username}/${this.password}/${streamId}.${extension}`;
   }
 
   /**
    * Get series episode stream URL
    */
-  getSeriesStreamUrl(episodeId: string, extension: string = "mp4"): string {
+  getSeriesStreamUrl(episodeId: string, extension: string = 'mp4'): string {
     return `${this.baseUrl}/series/${this.username}/${this.password}/${episodeId}.${extension}`;
   }
 }
@@ -288,7 +288,7 @@ export class IPTVApi {
 export class DeviceCodeApi {
   private apiUrl: string;
 
-  constructor(apiUrl: string = "https://api.polfun.de/api/device.php") {
+  constructor(apiUrl: string = 'https://api.polfun.de/api/device.php') {
     this.apiUrl = apiUrl;
   }
 
@@ -303,9 +303,9 @@ export class DeviceCodeApi {
     message?: string;
   }> {
     const response = await fetch(this.apiUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ deviceCode }),
     });

@@ -3,7 +3,7 @@
  * Displays episodes of a selected series
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
-} from "react-native";
-import { Episode, SeriesInfo } from "../services/iptvApi";
+} from 'react-native';
+import { Episode, SeriesInfo } from '../services/iptvApi';
 
 interface EpisodesScreenProps {
   seriesInfo: SeriesInfo;
@@ -31,10 +31,10 @@ export const EpisodesScreen: React.FC<EpisodesScreenProps> = ({
   loading = false,
 }) => {
   const seasons = Object.keys(episodes).sort(
-    (a, b) => parseInt(a) - parseInt(b)
+    (a, b) => parseInt(a, 10) - parseInt(b, 10)
   );
   const [selectedSeason, setSelectedSeason] = useState<string>(
-    seasons[0] || "1"
+    seasons[0] || '1'
   );
 
   const currentEpisodes = episodes[selectedSeason] || [];
@@ -151,15 +151,15 @@ export const EpisodesScreen: React.FC<EpisodesScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
@@ -167,71 +167,71 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   headerInfo: {
     flex: 1,
   },
   title: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   genre: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
     marginTop: 5,
   },
   infoBanner: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     padding: 20,
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   plot: {
     fontSize: 18,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
     lineHeight: 26,
     marginBottom: 10,
   },
   rating: {
     fontSize: 20,
-    color: "#ffa657",
+    color: '#ffa657',
   },
   content: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   seasonsContainer: {
     width: 250,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRightWidth: 2,
-    borderRightColor: "#30363d",
+    borderRightColor: '#30363d',
     padding: 20,
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 20,
   },
   seasonItem: {
     padding: 15,
     marginBottom: 10,
     borderRadius: 8,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   seasonItemSelected: {
-    backgroundColor: "#1f6feb",
-    borderColor: "#58a6ff",
+    backgroundColor: '#1f6feb',
+    borderColor: '#58a6ff',
   },
   seasonText: {
     fontSize: 20,
-    color: "#c9d1d9",
-    fontWeight: "600",
+    color: '#c9d1d9',
+    fontWeight: '600',
   },
   episodesContainer: {
     flex: 1,
@@ -241,14 +241,14 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   episodeItem: {
-    width: "48%",
-    margin: "1%",
-    backgroundColor: "#161b22",
+    width: '48%',
+    margin: '1%',
+    backgroundColor: '#161b22',
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: "#30363d",
-    overflow: "hidden",
-    flexDirection: "row",
+    borderColor: '#30363d',
+    overflow: 'hidden',
+    flexDirection: 'row',
     padding: 15,
   },
   episodeThumbnail: {
@@ -258,50 +258,50 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   episodeThumbnailPlaceholder: {
-    backgroundColor: "#30363d",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#30363d',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   episodeThumbnailText: {
     fontSize: 32,
-    color: "#58a6ff",
+    color: '#58a6ff',
   },
   episodeInfo: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   episodeNumber: {
     fontSize: 16,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
     marginBottom: 5,
   },
   episodeTitle: {
     fontSize: 18,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
     marginBottom: 5,
   },
   episodeDuration: {
     fontSize: 14,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loadingText: {
     fontSize: 24,
-    color: "#8b949e",
+    color: '#8b949e',
     marginTop: 20,
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   emptyText: {
     fontSize: 24,
-    color: "#8b949e",
+    color: '#8b949e',
   },
 });

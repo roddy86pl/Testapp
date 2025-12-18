@@ -12,27 +12,27 @@
  * - IPTV player functionality with API integration
  */
 
-import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
+import * as React from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   View,
   StyleSheet,
   BackHandler,
   NativeModules,
   Alert,
-} from "react-native";
-import { LoginScreen } from "./screens/LoginScreen";
-import { HomeScreen } from "./screens/HomeScreen";
-import { LiveTVScreen } from "./screens/LiveTVScreen";
-import { MoviesScreen } from "./screens/MoviesScreen";
-import { SeriesScreen } from "./screens/SeriesScreen";
-import { EpisodesScreen } from "./screens/EpisodesScreen";
-import { MovieDetailsScreen } from "./screens/MovieDetailsScreen";
-import { SeriesDetailsScreen } from "./screens/SeriesDetailsScreen";
-import { AccountScreen } from "./screens/AccountScreen";
-import { SettingsScreen } from "./screens/SettingsScreen";
-import { PlayerScreen } from "./screens/PlayerScreen";
-import { hashToDeviceCode, generateFallbackCode } from "./utils/deviceCode";
+} from 'react-native';
+import { LoginScreen } from './screens/LoginScreen';
+import { HomeScreen } from './screens/HomeScreen';
+import { LiveTVScreen } from './screens/LiveTVScreen';
+import { MoviesScreen } from './screens/MoviesScreen';
+import { SeriesScreen } from './screens/SeriesScreen';
+import { EpisodesScreen } from './screens/EpisodesScreen';
+import { MovieDetailsScreen } from './screens/MovieDetailsScreen';
+import { SeriesDetailsScreen } from './screens/SeriesDetailsScreen';
+import { AccountScreen } from './screens/AccountScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
+import { PlayerScreen } from './screens/PlayerScreen';
+import { hashToDeviceCode, generateFallbackCode } from './utils/deviceCode';
 import {
   IPTVApi,
   DeviceCodeApi,
@@ -44,36 +44,36 @@ import {
   SeriesInfo,
   Episode,
   UserInfo,
-} from "./services/iptvApi";
+} from './services/iptvApi';
 
 const { DeviceInfo } = NativeModules;
 
 type Screen =
-  | "login"
-  | "home"
-  | "livetv"
-  | "movies"
-  | "series"
-  | "episodes"
-  | "moviedetails"
-  | "seriesdetails"
-  | "account"
-  | "settings"
-  | "player";
+  | 'login'
+  | 'home'
+  | 'livetv'
+  | 'movies'
+  | 'series'
+  | 'episodes'
+  | 'moviedetails'
+  | 'seriesdetails'
+  | 'account'
+  | 'settings'
+  | 'player';
 
 export const App: React.FC = () => {
-  const [currentScreen, setCurrentScreen] = useState<Screen>("login");
-  const [deviceCode, setDeviceCode] = useState<string>("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState<Screen>('login');
+  const [deviceCode, setDeviceCode] = useState<string>('');
+  const [, setIsLoggedIn] = useState(false);
 
   // API client
   const [iptvApi, setIptvApi] = useState<IPTVApi | null>(null);
 
   // User data
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [serverUrl, setServerUrl] = useState("");
-  const [userExpiry, setUserExpiry] = useState("");
+  const [username, setUsername] = useState('');
+  const [, setPassword] = useState('');
+  const [serverUrl, setServerUrl] = useState('');
+  const [userExpiry, setUserExpiry] = useState('');
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   // Live TV
@@ -100,8 +100,8 @@ export const App: React.FC = () => {
   const [episodesLoading, setEpisodesLoading] = useState(false);
 
   // Player
-  const [playerStreamUrl, setPlayerStreamUrl] = useState("");
-  const [playerTitle, setPlayerTitle] = useState("");
+  const [playerStreamUrl, setPlayerStreamUrl] = useState('');
+  const [playerTitle, setPlayerTitle] = useState('');
 
   // Generate device code on mount
   useEffect(() => {
@@ -116,7 +116,7 @@ export const App: React.FC = () => {
           setDeviceCode(fallbackCode);
         }
       } catch (error) {
-        console.log("Device code generation error:", error);
+        console.log('Device code generation error:', error);
         setDeviceCode(generateFallbackCode());
       }
     };
@@ -127,37 +127,37 @@ export const App: React.FC = () => {
   // Handle Fire TV remote Back button
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
+      'hardwareBackPress',
       () => {
-        if (currentScreen === "player") {
+        if (currentScreen === 'player') {
           // Player screen handles its own back button
           return false;
-        } else if (currentScreen === "episodes") {
-          setCurrentScreen("seriesdetails");
+        } else if (currentScreen === 'episodes') {
+          setCurrentScreen('seriesdetails');
           return true;
-        } else if (currentScreen === "moviedetails") {
-          setCurrentScreen("movies");
+        } else if (currentScreen === 'moviedetails') {
+          setCurrentScreen('movies');
           return true;
-        } else if (currentScreen === "seriesdetails") {
-          setCurrentScreen("series");
-          return true;
-        } else if (
-          currentScreen === "account" ||
-          currentScreen === "settings"
-        ) {
-          setCurrentScreen("home");
+        } else if (currentScreen === 'seriesdetails') {
+          setCurrentScreen('series');
           return true;
         } else if (
-          currentScreen === "livetv" ||
-          currentScreen === "movies" ||
-          currentScreen === "series"
+          currentScreen === 'account' ||
+          currentScreen === 'settings'
         ) {
-          setCurrentScreen("home");
+          setCurrentScreen('home');
           return true;
-        } else if (currentScreen === "home") {
-          Alert.alert("Wyjść z aplikacji?", "Czy na pewno chcesz wyjść?", [
-            { text: "Nie", style: "cancel" },
-            { text: "Tak", onPress: () => BackHandler.exitApp() },
+        } else if (
+          currentScreen === 'livetv' ||
+          currentScreen === 'movies' ||
+          currentScreen === 'series'
+        ) {
+          setCurrentScreen('home');
+          return true;
+        } else if (currentScreen === 'home') {
+          Alert.alert('Wyjść z aplikacji?', 'Czy na pewno chcesz wyjść?', [
+            { text: 'Nie', style: 'cancel' },
+            { text: 'Tak', onPress: () => BackHandler.exitApp() },
           ]);
           return true;
         }
@@ -171,18 +171,17 @@ export const App: React.FC = () => {
   // Load all categories when logged in
   const loadAllCategories = useCallback(async (api: IPTVApi) => {
     try {
-      const [liveCategories, vodCategories, seriesCategories] =
-        await Promise.all([
-          api.getLiveCategories(),
-          api.getVodCategories(),
-          api.getSeriesCategories(),
-        ]);
+      const [liveCats, vodCats, seriesCats] = await Promise.all([
+        api.getLiveCategories(),
+        api.getVodCategories(),
+        api.getSeriesCategories(),
+      ]);
 
-      setLiveCategories(liveCategories);
-      setVodCategories(vodCategories);
-      setSeriesCategories(seriesCategories);
+      setLiveCategories(liveCats);
+      setVodCategories(vodCats);
+      setSeriesCategories(seriesCats);
     } catch (error) {
-      console.error("Failed to load categories:", error);
+      console.error('Failed to load categories:', error);
     }
   }, []);
 
@@ -199,8 +198,8 @@ export const App: React.FC = () => {
         !result.password
       ) {
         Alert.alert(
-          "Błąd",
-          result.message || "Kod urządzenia nie został zarejestrowany"
+          'Błąd',
+          result.message || 'Kod urządzenia nie został zarejestrowany'
         );
         return;
       }
@@ -211,14 +210,14 @@ export const App: React.FC = () => {
         result.username,
         result.password
       );
-      const userInfo = await api.authenticate();
+      const fetchedUserInfo = await api.authenticate();
 
       setIptvApi(api);
       setServerUrl(result.serverUrl);
       setUsername(result.username);
       setPassword(result.password);
-      setUserInfo(userInfo);
-      setUserExpiry(`Ważne do: ${userInfo.exp_date}`);
+      setUserInfo(fetchedUserInfo);
+      setUserExpiry(`Ważne do: ${fetchedUserInfo.exp_date}`);
       setIsLoggedIn(true);
 
       // Load categories
@@ -235,10 +234,10 @@ export const App: React.FC = () => {
       setVodMovies(vodStreams);
       setSeriesList(series);
 
-      setCurrentScreen("home");
+      setCurrentScreen('home');
     } catch (error) {
-      console.error("Device login error:", error);
-      Alert.alert("Błąd", "Nie udało się zalogować kodem urządzenia");
+      console.error('Device login error:', error);
+      Alert.alert('Błąd', 'Nie udało się zalogować kodem urządzenia');
     }
   }, [deviceCode, loadAllCategories]);
 
@@ -247,14 +246,14 @@ export const App: React.FC = () => {
     async (url: string, user: string, pass: string) => {
       try {
         const api = new IPTVApi(url, user, pass);
-        const userInfo = await api.authenticate();
+        const fetchedUserInfo = await api.authenticate();
 
         setIptvApi(api);
         setServerUrl(url);
         setUsername(user);
         setPassword(pass);
-        setUserInfo(userInfo);
-        setUserExpiry(`Ważne do: ${userInfo.exp_date}`);
+        setUserInfo(fetchedUserInfo);
+        setUserExpiry(`Ważne do: ${fetchedUserInfo.exp_date}`);
         setIsLoggedIn(true);
 
         // Load categories
@@ -271,12 +270,12 @@ export const App: React.FC = () => {
         setVodMovies(vodStreams);
         setSeriesList(series);
 
-        setCurrentScreen("home");
+        setCurrentScreen('home');
       } catch (error) {
-        console.error("Login error:", error);
+        console.error('Login error:', error);
         Alert.alert(
-          "Błąd",
-          "Nie udało się zalogować. Sprawdź dane i spróbuj ponownie."
+          'Błąd',
+          'Nie udało się zalogować. Sprawdź dane i spróbuj ponownie.'
         );
         throw error;
       }
@@ -286,7 +285,7 @@ export const App: React.FC = () => {
 
   // Navigation handlers
   const handleNavigateLiveTV = useCallback(async () => {
-    setCurrentScreen("livetv");
+    setCurrentScreen('livetv');
 
     if (!iptvApi) {
       return;
@@ -299,8 +298,8 @@ export const App: React.FC = () => {
         const streams = await iptvApi.getLiveStreams();
         setLiveChannels(streams);
       } catch (error) {
-        console.error("Failed to load live channels:", error);
-        Alert.alert("Błąd", "Nie udało się załadować kanałów");
+        console.error('Failed to load live channels:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować kanałów');
       } finally {
         setLiveTvLoading(false);
       }
@@ -318,8 +317,8 @@ export const App: React.FC = () => {
         const streams = await iptvApi.getLiveStreams(categoryId);
         setLiveChannels(streams);
       } catch (error) {
-        console.error("Failed to load category channels:", error);
-        Alert.alert("Błąd", "Nie udało się załadować kanałów");
+        console.error('Failed to load category channels:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować kanałów');
       } finally {
         setLiveTvLoading(false);
       }
@@ -328,7 +327,7 @@ export const App: React.FC = () => {
   );
 
   const handleNavigateMovies = useCallback(async () => {
-    setCurrentScreen("movies");
+    setCurrentScreen('movies');
 
     if (!iptvApi) {
       return;
@@ -340,8 +339,8 @@ export const App: React.FC = () => {
         const streams = await iptvApi.getVodStreams();
         setVodMovies(streams);
       } catch (error) {
-        console.error("Failed to load movies:", error);
-        Alert.alert("Błąd", "Nie udało się załadować filmów");
+        console.error('Failed to load movies:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować filmów');
       } finally {
         setMoviesLoading(false);
       }
@@ -359,8 +358,8 @@ export const App: React.FC = () => {
         const streams = await iptvApi.getVodStreams(categoryId);
         setVodMovies(streams);
       } catch (error) {
-        console.error("Failed to load category movies:", error);
-        Alert.alert("Błąd", "Nie udało się załadować filmów");
+        console.error('Failed to load category movies:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować filmów');
       } finally {
         setMoviesLoading(false);
       }
@@ -370,7 +369,7 @@ export const App: React.FC = () => {
 
   const handleSelectMovie = useCallback((movie: VodMovie) => {
     setSelectedMovie(movie);
-    setCurrentScreen("moviedetails");
+    setCurrentScreen('moviedetails');
   }, []);
 
   const handlePlayMovie = useCallback(
@@ -384,13 +383,13 @@ export const App: React.FC = () => {
       );
       setPlayerStreamUrl(streamUrl);
       setPlayerTitle(movie.name);
-      setCurrentScreen("player");
+      setCurrentScreen('player');
     },
     [iptvApi]
   );
 
   const handleNavigateSeries = useCallback(async () => {
-    setCurrentScreen("series");
+    setCurrentScreen('series');
 
     if (!iptvApi) {
       return;
@@ -402,8 +401,8 @@ export const App: React.FC = () => {
         const series = await iptvApi.getSeries();
         setSeriesList(series);
       } catch (error) {
-        console.error("Failed to load series:", error);
-        Alert.alert("Błąd", "Nie udało się załadować seriali");
+        console.error('Failed to load series:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować seriali');
       } finally {
         setSeriesLoading(false);
       }
@@ -421,8 +420,8 @@ export const App: React.FC = () => {
         const series = await iptvApi.getSeries(categoryId);
         setSeriesList(series);
       } catch (error) {
-        console.error("Failed to load category series:", error);
-        Alert.alert("Błąd", "Nie udało się załadować seriali");
+        console.error('Failed to load category series:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować seriali');
       } finally {
         setSeriesLoading(false);
       }
@@ -432,7 +431,7 @@ export const App: React.FC = () => {
 
   const handleSelectSeries = useCallback((series: SeriesInfo) => {
     setSelectedSeries(series);
-    setCurrentScreen("seriesdetails");
+    setCurrentScreen('seriesdetails');
   }, []);
 
   const handleViewEpisodes = useCallback(
@@ -447,10 +446,10 @@ export const App: React.FC = () => {
       try {
         const seriesData = await iptvApi.getSeriesInfo(series.series_id);
         setEpisodes(seriesData.episodes);
-        setCurrentScreen("episodes");
+        setCurrentScreen('episodes');
       } catch (error) {
-        console.error("Failed to load episodes:", error);
-        Alert.alert("Błąd", "Nie udało się załadować odcinków");
+        console.error('Failed to load episodes:', error);
+        Alert.alert('Błąd', 'Nie udało się załadować odcinków');
       } finally {
         setEpisodesLoading(false);
       }
@@ -469,7 +468,7 @@ export const App: React.FC = () => {
       );
       setPlayerStreamUrl(streamUrl);
       setPlayerTitle(episode.title);
-      setCurrentScreen("player");
+      setCurrentScreen('player');
     },
     [iptvApi]
   );
@@ -485,27 +484,27 @@ export const App: React.FC = () => {
       );
       setPlayerStreamUrl(streamUrl);
       setPlayerTitle(channel.name);
-      setCurrentScreen("player");
+      setCurrentScreen('player');
     },
     [iptvApi]
   );
 
   const handleNavigateAccount = useCallback(() => {
-    setCurrentScreen("account");
+    setCurrentScreen('account');
   }, []);
 
   const handleNavigateSettings = useCallback(() => {
-    setCurrentScreen("settings");
+    setCurrentScreen('settings');
   }, []);
 
   const handleLogout = useCallback(() => {
     setIsLoggedIn(false);
     setIptvApi(null);
     setUserInfo(null);
-    setUsername("");
-    setPassword("");
-    setServerUrl("");
-    setUserExpiry("");
+    setUsername('');
+    setPassword('');
+    setServerUrl('');
+    setUserExpiry('');
     setLiveCategories([]);
     setLiveChannels([]);
     setVodCategories([]);
@@ -514,7 +513,7 @@ export const App: React.FC = () => {
     setSeriesList([]);
     setSelectedSeries(null);
     setEpisodes({});
-    setCurrentScreen("login");
+    setCurrentScreen('login');
   }, []);
 
   const handleClearCache = useCallback(() => {
@@ -523,23 +522,23 @@ export const App: React.FC = () => {
     setVodMovies([]);
     setSeriesList([]);
     setEpisodes({});
-    console.log("Cache cleared");
+    console.log('Cache cleared');
   }, []);
 
   const handleBackToHome = useCallback(() => {
-    setCurrentScreen("home");
+    setCurrentScreen('home');
   }, []);
 
   return (
     <View style={styles.container}>
-      {currentScreen === "login" && (
+      {currentScreen === 'login' && (
         <LoginScreen
           deviceCode={deviceCode}
           onLogin={handleLogin}
           onDeviceLogin={handleDeviceLogin}
         />
       )}
-      {currentScreen === "home" && (
+      {currentScreen === 'home' && (
         <HomeScreen
           username={username}
           expiry={userExpiry}
@@ -553,7 +552,7 @@ export const App: React.FC = () => {
           onNavigateSettings={handleNavigateSettings}
         />
       )}
-      {currentScreen === "livetv" && (
+      {currentScreen === 'livetv' && (
         <LiveTVScreen
           categories={liveCategories}
           channels={liveChannels}
@@ -563,7 +562,7 @@ export const App: React.FC = () => {
           loading={liveTvLoading}
         />
       )}
-      {currentScreen === "movies" && (
+      {currentScreen === 'movies' && (
         <MoviesScreen
           categories={vodCategories}
           movies={vodMovies}
@@ -573,7 +572,7 @@ export const App: React.FC = () => {
           loading={moviesLoading}
         />
       )}
-      {currentScreen === "series" && (
+      {currentScreen === 'series' && (
         <SeriesScreen
           categories={seriesCategories}
           series={seriesList}
@@ -583,30 +582,30 @@ export const App: React.FC = () => {
           loading={seriesLoading}
         />
       )}
-      {currentScreen === "episodes" && selectedSeries && (
+      {currentScreen === 'episodes' && selectedSeries && (
         <EpisodesScreen
           seriesInfo={selectedSeries}
           episodes={episodes}
           onSelectEpisode={handleSelectEpisode}
-          onBack={() => setCurrentScreen("seriesdetails")}
+          onBack={() => setCurrentScreen('seriesdetails')}
           loading={episodesLoading}
         />
       )}
-      {currentScreen === "moviedetails" && selectedMovie && (
+      {currentScreen === 'moviedetails' && selectedMovie && (
         <MovieDetailsScreen
           movie={selectedMovie}
           onPlay={handlePlayMovie}
-          onBack={() => setCurrentScreen("movies")}
+          onBack={() => setCurrentScreen('movies')}
         />
       )}
-      {currentScreen === "seriesdetails" && selectedSeries && (
+      {currentScreen === 'seriesdetails' && selectedSeries && (
         <SeriesDetailsScreen
           series={selectedSeries}
           onViewEpisodes={handleViewEpisodes}
-          onBack={() => setCurrentScreen("series")}
+          onBack={() => setCurrentScreen('series')}
         />
       )}
-      {currentScreen === "account" && userInfo && (
+      {currentScreen === 'account' && userInfo && (
         <AccountScreen
           userInfo={userInfo}
           serverUrl={serverUrl}
@@ -614,17 +613,17 @@ export const App: React.FC = () => {
           onBack={handleBackToHome}
         />
       )}
-      {currentScreen === "settings" && (
+      {currentScreen === 'settings' && (
         <SettingsScreen
           onBack={handleBackToHome}
           onClearCache={handleClearCache}
         />
       )}
-      {currentScreen === "player" && (
+      {currentScreen === 'player' && (
         <PlayerScreen
           streamUrl={playerStreamUrl}
           title={playerTitle}
-          onBack={() => setCurrentScreen("home")}
+          onBack={() => setCurrentScreen('home')}
         />
       )}
     </View>
@@ -634,7 +633,7 @@ export const App: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
 });
 

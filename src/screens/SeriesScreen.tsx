@@ -3,7 +3,7 @@
  * Displays series categories and shows
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
-} from "react-native";
-import { SeriesCategory, SeriesInfo } from "../services/iptvApi";
+} from 'react-native';
+import { SeriesCategory, SeriesInfo } from '../services/iptvApi';
 
 interface SeriesScreenProps {
   categories: SeriesCategory[];
@@ -32,7 +32,7 @@ export const SeriesScreen: React.FC<SeriesScreenProps> = ({
   onBack,
   loading = false,
 }) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
 
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategoryId(categoryId);
@@ -139,66 +139,66 @@ export const SeriesScreen: React.FC<SeriesScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   title: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   seriesCount: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   content: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   categoriesContainer: {
     width: 300,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRightWidth: 2,
-    borderRightColor: "#30363d",
+    borderRightColor: '#30363d',
     padding: 20,
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 20,
   },
   categoryItem: {
     padding: 15,
     marginBottom: 10,
     borderRadius: 8,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   categoryItemSelected: {
-    backgroundColor: "#1f6feb",
-    borderColor: "#58a6ff",
+    backgroundColor: '#1f6feb',
+    borderColor: '#58a6ff',
   },
   categoryText: {
     fontSize: 20,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
   },
   seriesContainer: {
     flex: 1,
@@ -208,22 +208,22 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   seriesItem: {
-    width: "23%",
-    margin: "1%",
-    backgroundColor: "#161b22",
+    width: '23%',
+    margin: '1%',
+    backgroundColor: '#161b22',
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: "#30363d",
-    overflow: "hidden",
+    borderColor: '#30363d',
+    overflow: 'hidden',
   },
   seriesPoster: {
-    width: "100%",
+    width: '100%',
     height: 220,
   },
   seriesPosterPlaceholder: {
-    backgroundColor: "#30363d",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#30363d',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   seriesPosterText: {
     fontSize: 64,
@@ -233,40 +233,40 @@ const styles = StyleSheet.create({
   },
   seriesName: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#c9d1d9",
+    fontWeight: '600',
+    color: '#c9d1d9',
     marginBottom: 8,
   },
   ratingContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 4,
   },
   ratingText: {
     fontSize: 16,
-    color: "#ffa657",
+    color: '#ffa657',
   },
   genreText: {
     fontSize: 14,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loadingText: {
     fontSize: 24,
-    color: "#8b949e",
+    color: '#8b949e',
     marginTop: 20,
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   emptyText: {
     fontSize: 24,
-    color: "#8b949e",
+    color: '#8b949e',
   },
 });

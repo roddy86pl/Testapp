@@ -3,7 +3,7 @@
  * Application settings and preferences
  */
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,12 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-} from "react-native";
+} from 'react-native';
 import {
   APP_VERSION,
   PLATFORM_NAME,
   REACT_NATIVE_VERSION,
-} from "../utils/constants";
+} from '../utils/constants';
 
 interface SettingsScreenProps {
   onBack: () => void;
@@ -34,15 +34,15 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   const handleClearCache = () => {
     Alert.alert(
-      "Wyczyść pamięć podręczną",
-      "Czy na pewno chcesz wyczyścić cache aplikacji?",
+      'Wyczyść pamięć podręczną',
+      'Czy na pewno chcesz wyczyścić cache aplikacji?',
       [
-        { text: "Anuluj", style: "cancel" },
+        { text: 'Anuluj', style: 'cancel' },
         {
-          text: "Wyczyść",
+          text: 'Wyczyść',
           onPress: () => {
             onClearCache();
-            Alert.alert("Gotowe", "Pamięć podręczna została wyczyszczona");
+            Alert.alert('Gotowe', 'Pamięć podręczna została wyczyszczona');
           },
         },
       ]
@@ -51,18 +51,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   const handleResetSettings = () => {
     Alert.alert(
-      "Resetuj ustawienia",
-      "Czy na pewno chcesz przywrócić domyślne ustawienia?",
+      'Resetuj ustawienia',
+      'Czy na pewno chcesz przywrócić domyślne ustawienia?',
       [
-        { text: "Anuluj", style: "cancel" },
+        { text: 'Anuluj', style: 'cancel' },
         {
-          text: "Resetuj",
+          text: 'Resetuj',
           onPress: () => {
             setAutoplay(true);
             setNotifications(true);
             setHdQuality(true);
             setSubtitles(false);
-            Alert.alert("Gotowe", "Ustawienia zostały zresetowane");
+            Alert.alert('Gotowe', 'Ustawienia zostały zresetowane');
           },
         },
       ]
@@ -96,7 +96,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               </Text>
             </View>
             <View style={[styles.toggle, autoplay && styles.toggleActive]}>
-              <Text style={styles.toggleText}>{autoplay ? "ON" : "OFF"}</Text>
+              <Text style={styles.toggleText}>{autoplay ? 'ON' : 'OFF'}</Text>
             </View>
           </TouchableOpacity>
 
@@ -111,7 +111,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               </Text>
             </View>
             <View style={[styles.toggle, hdQuality && styles.toggleActive]}>
-              <Text style={styles.toggleText}>{hdQuality ? "ON" : "OFF"}</Text>
+              <Text style={styles.toggleText}>{hdQuality ? 'ON' : 'OFF'}</Text>
             </View>
           </TouchableOpacity>
 
@@ -126,7 +126,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               </Text>
             </View>
             <View style={[styles.toggle, subtitles && styles.toggleActive]}>
-              <Text style={styles.toggleText}>{subtitles ? "ON" : "OFF"}</Text>
+              <Text style={styles.toggleText}>{subtitles ? 'ON' : 'OFF'}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -147,7 +147,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             </View>
             <View style={[styles.toggle, notifications && styles.toggleActive]}>
               <Text style={styles.toggleText}>
-                {notifications ? "ON" : "OFF"}
+                {notifications ? 'ON' : 'OFF'}
               </Text>
             </View>
           </TouchableOpacity>
@@ -223,15 +223,15 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
@@ -239,13 +239,13 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   headerTitle: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   content: {
     flex: 1,
@@ -256,20 +256,20 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 20,
   },
   settingRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#161b22",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#161b22',
     padding: 25,
     borderRadius: 12,
     marginBottom: 15,
     borderWidth: 2,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   settingInfo: {
     flex: 1,
@@ -277,80 +277,80 @@ const styles = StyleSheet.create({
   },
   settingName: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#c9d1d9",
+    fontWeight: '600',
+    color: '#c9d1d9',
     marginBottom: 5,
   },
   settingDescription: {
     fontSize: 18,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   toggle: {
     width: 80,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#30363d",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#30363d',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
-    borderColor: "#484f58",
+    borderColor: '#484f58',
   },
   toggleActive: {
-    backgroundColor: "#238636",
-    borderColor: "#2ea043",
+    backgroundColor: '#238636',
+    borderColor: '#2ea043',
   },
   toggleText: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
   },
   actionRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#161b22",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#161b22',
     padding: 25,
     borderRadius: 12,
     marginBottom: 15,
     borderWidth: 2,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   actionArrow: {
     fontSize: 32,
-    color: "#58a6ff",
-    fontWeight: "bold",
+    color: '#58a6ff',
+    fontWeight: 'bold',
   },
   infoCard: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRadius: 12,
     padding: 25,
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   infoRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 15,
     paddingBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   infoLabel: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   infoValue: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#c9d1d9",
+    fontWeight: '600',
+    color: '#c9d1d9',
   },
   footer: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 30,
     marginTop: 20,
   },
   footerText: {
     fontSize: 16,
-    color: "#8b949e",
+    color: '#8b949e',
   },
 });

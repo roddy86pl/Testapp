@@ -3,9 +3,9 @@
  * Main menu with Live TV, Movies, Series options
  */
 
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { APP_NAME } from "../utils/constants";
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { APP_NAME } from '../utils/constants';
 
 interface HomeScreenProps {
   username: string;
@@ -32,9 +32,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onNavigateAccount,
   onNavigateSettings,
 }) => {
-  const currentTime = new Date().toLocaleTimeString("pl-PL", {
-    hour: "2-digit",
-    minute: "2-digit",
+  const currentTime = new Date().toLocaleTimeString('pl-PL', {
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   return (
@@ -123,88 +123,88 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 30,
     paddingTop: 40,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   clock: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#58a6ff",
-    fontFamily: "monospace",
+    fontWeight: 'bold',
+    color: '#58a6ff',
+    fontFamily: 'monospace',
   },
   logoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   logoIcon: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#58a6ff",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#58a6ff',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 15,
   },
   logoIconText: {
     fontSize: 24,
-    color: "#fff",
+    color: '#fff',
   },
   logoText: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   logoBox: {
-    color: "#58a6ff",
+    color: '#58a6ff',
   },
   userInfo: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   username: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#c9d1d9",
+    fontWeight: '600',
+    color: '#c9d1d9',
   },
   expiry: {
     fontSize: 18,
-    color: "#8b949e",
+    color: '#8b949e',
     marginTop: 4,
   },
   content: {
     flex: 1,
     padding: 40,
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 30,
   },
   card: {
     borderRadius: 16,
     padding: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   cardLarge: {
     flex: 2,
-    backgroundColor: "#1f6feb",
+    backgroundColor: '#1f6feb',
   },
   cardSmall: {
     flex: 1,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
   },
   gridContainer: {
     flex: 3,
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 30,
   },
   cardIcon: {
@@ -213,12 +213,12 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
     marginBottom: 12,
   },
   cardCount: {
     fontSize: 24,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
   },
 });

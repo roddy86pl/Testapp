@@ -3,7 +3,7 @@
  * Shows detailed information about a selected movie
  */
 
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-} from "react-native";
-import { VodMovie } from "../services/iptvApi";
+} from 'react-native';
+import { VodMovie } from '../services/iptvApi';
 
 interface MovieDetailsScreenProps {
   movie: VodMovie;
@@ -78,9 +78,9 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
               <View style={styles.metaItem}>
                 <Text style={styles.metaLabel}>Dodano:</Text>
                 <Text style={styles.metaValue}>
-                  {new Date(parseInt(movie.added) * 1000).toLocaleDateString(
-                    "pl-PL"
-                  )}
+                  {new Date(
+                    parseInt(movie.added, 10) * 1000
+                  ).toLocaleDateString('pl-PL')}
                 </Text>
               </View>
             )}
@@ -121,7 +121,7 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
 
             <TouchableOpacity
               style={[styles.actionButton, styles.secondaryButton]}
-              onPress={() => console.log("Add to favorites")}
+              onPress={() => console.log('Add to favorites')}
             >
               <Text style={styles.actionButtonText}>
                 ❤️ Dodaj do ulubionych
@@ -137,15 +137,15 @@ export const MovieDetailsScreen: React.FC<MovieDetailsScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
@@ -153,110 +153,110 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   headerTitle: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   content: {
     flex: 1,
   },
   posterContainer: {
-    width: "100%",
+    width: '100%',
     height: 500,
-    position: "relative",
+    position: 'relative',
   },
   poster: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   posterPlaceholder: {
-    backgroundColor: "#30363d",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#30363d',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   posterPlaceholderText: {
     fontSize: 120,
   },
   playButtonOverlay: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   playButton: {
-    backgroundColor: "#1f6feb",
+    backgroundColor: '#1f6feb',
     paddingHorizontal: 60,
     paddingVertical: 25,
     borderRadius: 12,
     borderWidth: 3,
-    borderColor: "#58a6ff",
+    borderColor: '#58a6ff',
   },
   playButtonText: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
   },
   infoContainer: {
     padding: 40,
   },
   title: {
     fontSize: 48,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 30,
   },
   metaContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginBottom: 30,
   },
   metaItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginRight: 40,
     marginBottom: 15,
   },
   metaLabel: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
     marginRight: 10,
   },
   metaValue: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffa657",
+    fontWeight: '600',
+    color: '#ffa657',
   },
   section: {
     marginBottom: 30,
   },
   sectionTitle: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 15,
   },
   techInfo: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     padding: 20,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   techInfoText: {
     fontSize: 18,
-    color: "#8b949e",
+    color: '#8b949e',
     marginBottom: 8,
   },
   actionsContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 20,
     marginTop: 20,
   },
@@ -265,20 +265,20 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 30,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: 2,
   },
   primaryButton: {
-    backgroundColor: "#238636",
-    borderColor: "#2ea043",
+    backgroundColor: '#238636',
+    borderColor: '#2ea043',
   },
   secondaryButton: {
-    backgroundColor: "#30363d",
-    borderColor: "#484f58",
+    backgroundColor: '#30363d',
+    borderColor: '#484f58',
   },
   actionButtonText: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
 });

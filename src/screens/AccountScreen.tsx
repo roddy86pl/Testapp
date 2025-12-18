@@ -3,7 +3,7 @@
  * User account information and settings
  */
 
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-} from "react-native";
-import { UserInfo } from "../services/iptvApi";
+} from 'react-native';
+import { UserInfo } from '../services/iptvApi';
 
 interface AccountScreenProps {
   userInfo: UserInfo;
@@ -29,22 +29,22 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
 }) => {
   const handleExit = () => {
     Alert.alert(
-      "Wyjść z aplikacji?",
-      "Czy na pewno chcesz opuścić aplikację?",
+      'Wyjść z aplikacji?',
+      'Czy na pewno chcesz opuścić aplikację?',
       [
-        { text: "Anuluj", style: "cancel" },
-        { text: "Wyjdź", onPress: onLogout, style: "destructive" },
+        { text: 'Anuluj', style: 'cancel' },
+        { text: 'Wyjdź', onPress: onLogout, style: 'destructive' },
       ]
     );
   };
 
   const formatDate = (timestamp: string) => {
     try {
-      const date = new Date(parseInt(timestamp) * 1000);
-      return date.toLocaleDateString("pl-PL", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+      const date = new Date(parseInt(timestamp, 10) * 1000);
+      return date.toLocaleDateString('pl-PL', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
       });
     } catch {
       return timestamp;
@@ -53,7 +53,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
 
   const isExpired = () => {
     try {
-      const expDate = new Date(parseInt(userInfo.exp_date) * 1000);
+      const expDate = new Date(parseInt(userInfo.exp_date, 10) * 1000);
       return expDate < new Date();
     } catch {
       return false;
@@ -84,7 +84,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
             ]}
           >
             <Text style={styles.statusText}>
-              {isExpired() ? "❌ Wygasło" : "✅ Aktywne"}
+              {isExpired() ? '❌ Wygasło' : '✅ Aktywne'}
             </Text>
           </View>
         </View>
@@ -123,7 +123,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
             <View style={styles.detailRow}>
               <Text style={styles.detailLabel}>Konto próbne:</Text>
               <Text style={styles.detailValue}>
-                {userInfo.is_trial === "1" ? "Tak" : "Nie"}
+                {userInfo.is_trial === '1' ? 'Tak' : 'Nie'}
               </Text>
             </View>
           </View>
@@ -203,15 +203,15 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
@@ -219,34 +219,34 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   headerTitle: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   content: {
     flex: 1,
     padding: 40,
   },
   card: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRadius: 16,
     padding: 40,
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 30,
     borderWidth: 2,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   userIcon: {
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: "#1f6feb",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#1f6feb',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
   },
   userIconText: {
@@ -254,8 +254,8 @@ const styles = StyleSheet.create({
   },
   username: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 15,
   },
   statusBadge: {
@@ -264,80 +264,80 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   activeBadge: {
-    backgroundColor: "#238636",
+    backgroundColor: '#238636',
   },
   expiredBadge: {
-    backgroundColor: "#da3633",
+    backgroundColor: '#da3633',
   },
   statusText: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
   section: {
     marginBottom: 30,
   },
   sectionTitle: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 15,
   },
   detailsCard: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRadius: 12,
     padding: 25,
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 15,
     paddingBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   detailLabel: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
   },
   detailValue: {
     fontSize: 20,
-    fontWeight: "600",
-    color: "#c9d1d9",
+    fontWeight: '600',
+    color: '#c9d1d9',
     flex: 1,
-    textAlign: "right",
+    textAlign: 'right',
   },
   expiredText: {
-    color: "#f85149",
+    color: '#f85149',
   },
   formatsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 10,
   },
   formatBadge: {
-    backgroundColor: "#1f6feb",
+    backgroundColor: '#1f6feb',
     paddingHorizontal: 15,
     paddingVertical: 8,
     borderRadius: 8,
   },
   formatText: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
   messageCard: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderRadius: 12,
     padding: 20,
     borderWidth: 1,
-    borderColor: "#ffa657",
+    borderColor: '#ffa657',
   },
   messageText: {
     fontSize: 20,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
     lineHeight: 28,
   },
   actionsContainer: {
@@ -348,27 +348,27 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 40,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: 2,
   },
   exitButton: {
-    backgroundColor: "#da3633",
-    borderColor: "#f85149",
+    backgroundColor: '#da3633',
+    borderColor: '#f85149',
   },
   actionButtonText: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
   footer: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 30,
     borderTopWidth: 1,
-    borderTopColor: "#30363d",
+    borderTopColor: '#30363d',
   },
   footerText: {
     fontSize: 16,
-    color: "#8b949e",
+    color: '#8b949e',
     marginBottom: 5,
   },
 });

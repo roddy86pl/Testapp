@@ -3,7 +3,7 @@
  * Shows detailed information about a selected series
  */
 
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-} from "react-native";
-import { SeriesInfo } from "../services/iptvApi";
+} from 'react-native';
+import { SeriesInfo } from '../services/iptvApi';
 
 interface SeriesDetailsScreenProps {
   series: SeriesInfo;
@@ -137,10 +137,10 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
               )}
               {series.last_modified && (
                 <Text style={styles.techInfoText}>
-                  Ostatnia aktualizacja:{" "}
+                  Ostatnia aktualizacja:{' '}
                   {new Date(
-                    parseInt(series.last_modified) * 1000
-                  ).toLocaleDateString("pl-PL")}
+                    parseInt(series.last_modified, 10) * 1000
+                  ).toLocaleDateString('pl-PL')}
                 </Text>
               )}
             </View>
@@ -157,7 +157,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
 
             <TouchableOpacity
               style={[styles.actionButton, styles.secondaryButton]}
-              onPress={() => console.log("Add to favorites")}
+              onPress={() => console.log('Add to favorites')}
             >
               <Text style={styles.actionButtonText}>
                 ❤️ Dodaj do ulubionych
@@ -170,7 +170,7 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
             <TouchableOpacity
               style={styles.trailerButton}
               onPress={() =>
-                console.log("Play trailer:", series.youtube_trailer)
+                console.log('Play trailer:', series.youtube_trailer)
               }
             >
               <Text style={styles.trailerButtonText}>🎬 Obejrzyj zwiastun</Text>
@@ -185,15 +185,15 @@ export const SeriesDetailsScreen: React.FC<SeriesDetailsScreenProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0d1117",
+    backgroundColor: '#0d1117',
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 30,
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     borderBottomWidth: 2,
-    borderBottomColor: "#30363d",
+    borderBottomColor: '#30363d',
   },
   backButton: {
     padding: 10,
@@ -201,99 +201,99 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: "#58a6ff",
-    fontWeight: "600",
+    color: '#58a6ff',
+    fontWeight: '600',
   },
   headerTitle: {
     fontSize: 32,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
   },
   content: {
     flex: 1,
   },
   coverContainer: {
-    width: "100%",
+    width: '100%',
     height: 500,
-    position: "relative",
+    position: 'relative',
   },
   cover: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   coverPlaceholder: {
-    backgroundColor: "#30363d",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#30363d',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   coverPlaceholderText: {
     fontSize: 120,
   },
   viewButtonOverlay: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   viewButton: {
-    backgroundColor: "#1f6feb",
+    backgroundColor: '#1f6feb',
     paddingHorizontal: 60,
     paddingVertical: 25,
     borderRadius: 12,
     borderWidth: 3,
-    borderColor: "#58a6ff",
+    borderColor: '#58a6ff',
   },
   viewButtonText: {
     fontSize: 36,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: 'bold',
+    color: '#fff',
   },
   infoContainer: {
     padding: 40,
   },
   title: {
     fontSize: 48,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 30,
   },
   metaContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginBottom: 30,
   },
   metaItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginRight: 40,
     marginBottom: 15,
   },
   metaLabel: {
     fontSize: 20,
-    color: "#8b949e",
+    color: '#8b949e',
     marginRight: 10,
   },
   metaValue: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffa657",
+    fontWeight: '600',
+    color: '#ffa657',
   },
   section: {
     marginBottom: 30,
   },
   sectionTitle: {
     fontSize: 28,
-    fontWeight: "bold",
-    color: "#c9d1d9",
+    fontWeight: 'bold',
+    color: '#c9d1d9',
     marginBottom: 15,
   },
   plotText: {
     fontSize: 20,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
     lineHeight: 32,
   },
   crewItem: {
@@ -301,27 +301,27 @@ const styles = StyleSheet.create({
   },
   crewLabel: {
     fontSize: 18,
-    color: "#8b949e",
+    color: '#8b949e',
     marginBottom: 5,
   },
   crewValue: {
     fontSize: 20,
-    color: "#c9d1d9",
+    color: '#c9d1d9',
   },
   techInfo: {
-    backgroundColor: "#161b22",
+    backgroundColor: '#161b22',
     padding: 20,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#30363d",
+    borderColor: '#30363d',
   },
   techInfoText: {
     fontSize: 18,
-    color: "#8b949e",
+    color: '#8b949e',
     marginBottom: 8,
   },
   actionsContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 20,
     marginTop: 20,
   },
@@ -330,35 +330,35 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 30,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     borderWidth: 2,
   },
   primaryButton: {
-    backgroundColor: "#238636",
-    borderColor: "#2ea043",
+    backgroundColor: '#238636',
+    borderColor: '#2ea043',
   },
   secondaryButton: {
-    backgroundColor: "#30363d",
-    borderColor: "#484f58",
+    backgroundColor: '#30363d',
+    borderColor: '#484f58',
   },
   actionButtonText: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
   trailerButton: {
     marginTop: 20,
     paddingVertical: 18,
     paddingHorizontal: 30,
     borderRadius: 8,
-    alignItems: "center",
-    backgroundColor: "#da3633",
+    alignItems: 'center',
+    backgroundColor: '#da3633',
     borderWidth: 2,
-    borderColor: "#f85149",
+    borderColor: '#f85149',
   },
   trailerButtonText: {
     fontSize: 24,
-    fontWeight: "600",
-    color: "#fff",
+    fontWeight: '600',
+    color: '#fff',
   },
 });
