@@ -119,12 +119,12 @@ export class IPTVApi {
    */
   private buildUrl(
     action: string,
-    additionalParams: Record<string, string> = {}
+    additionalParams?: Record<string, string>
   ): string {
     const params = new URLSearchParams({
       username: this.username,
       password: this.password,
-      ...additionalParams,
+      ...(additionalParams || {}),
     });
     return `${
       this.baseUrl
