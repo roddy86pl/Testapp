@@ -1,0 +1,18 @@
+{
+  "name": "polfunbox",
+  "displayName": "PolFunBox",
+  "version": "1.0.0",
+  "description": "IPTV Player for Amazon Vega OS",
+  "expo": {
+    "name": "PolFunBox",
+    "slug": "polfunbox",
+    "version": "1.0.0",
+    "orientation": "landscape",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#0d1117"
+    }
+  }
+}
