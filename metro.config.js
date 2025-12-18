@@ -1,22 +1,11 @@
-const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 /**
- * Metro configuration for PolFun Box Vega OS
- * https://facebook.github.io/metro/docs/configuration
+ * Metro configuration
+ * https://reactnative.dev/docs/metro
+ *
+ * @type {import('metro-config').MetroConfig}
  */
-const config = {
-  resolver: {
-    // Dodaj rozszerzenia plików
-    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'json'],
-  },
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-};
+const config = {};
 
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);

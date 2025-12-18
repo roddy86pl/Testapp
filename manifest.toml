@@ -2,11 +2,13 @@
 # TESTAPP - MANIFEST VEGA OS
 # React Native Application for Amazon Fire TV Stick (Vega OS / Kepler)
 # ============================================================================
+schema-version = 1
 
 [package]
 name = "TestApp"
 id = "com.testapp.vegaos"
 version = "1.0.0"
+title = "TestApp"
 description = "React Native Application for Amazon Vega OS/Kepler"
 author = "TestApp Team"
 icon = "assets/images/icon.png"
@@ -15,18 +17,51 @@ icon = "assets/images/icon.png"
 # COMPONENTS
 # ============================================================================
 
+[components]
 [[components.interactive]]
 id = "com.testapp.vegaos.main"
 name = "TestApp"
 entry = "index"
 icon = "assets/images/icon.png"
-
-# Runtime module for React Native
 runtime-module = "/com.amazon.kepler.keplerscript.runtime.loader_2@IKeplerScript_2_0"
+categories = [
+    "com.amazon.category.main",
+]
+launch-type = "singleton"
 
-# Launch options
 [components.interactive.launch-options]
 splash-screen = "assets/images/splash.png"
+
+# ============================================================================
+# Service Components
+# ============================================================================
+
+[[components.service]]
+id = "com.testapp.vegaos.interface.provider"
+launch-type = "singleton"
+runtime-module = "/com.amazon.kepler.headless.runtime.loader_2@IKeplerScript_2_0"
+
+# ============================================================================
+# Task Components
+# ============================================================================
+
+[[components.task]]
+id = "com.testapp.vegaos.onInstallOrUpdateTask"
+runtime-module = "/com.amazon.kepler.headless.runtime.loader_2@IKeplerScript_2_0"
+
+# ============================================================================
+# PROCESSES
+# ============================================================================
+
+[processes]
+[[processes.group]]
+component-ids = ["com.testapp.vegaos.main"]
+
+[[processes.group]]
+component-ids = ["com.testapp.vegaos.interface.provider"]
+
+[[processes.group]]
+component-ids = ["com.testapp.vegaos.onInstallOrUpdateTask"]
 
 # ============================================================================
 # REQUIRED SERVICES (needs) - app won't start without these
@@ -37,6 +72,10 @@ splash-screen = "assets/images/splash.png"
 # Internet access
 [[needs.privilege]]
 id = "com.amazon.privilege.network.client"
+
+# Network information
+[[needs.privilege]]
+id="com.amazon.network.privilege.net-info"
 
 # ============================================================================
 # OPTIONAL SERVICES (wants) - app can run without these
@@ -51,6 +90,100 @@ id = "com.amazon.device.info"
 # Data storage
 [[wants.privilege]]
 id = "com.amazon.privilege.filesystem.scratch.readwrite"
+
+# Input method service
+[[wants.service]]
+id = "com.amazon.inputmethod.service"
+
+# MediaPlayer/MediaTransform for video playback
+[[wants.service]]
+id = "com.amazon.media.server"
+
+[[wants.service]]
+id = "com.amazon.mediametrics.service"
+
+# Remote button events
+[[wants.service]]
+id = "com.amazon.inputd.service"
+
+# MediaControls
+[[wants.service]]
+id = "com.amazon.media.playersession.service"
+
+[[wants.service]]
+id = "com.amazon.mediabuffer.service"
+
+[[wants.service]]
+id = "com.amazon.mediatransform.service"
+
+# Audio stream
+[[wants.service]]
+id = "com.amazon.audio.stream"
+
+# Volume and audio controls
+[[wants.service]]
+id = "com.amazon.audio.control"
+
+[[wants.service]]
+id = "com.amazon.audio.system"
+
+# Network information
+[[wants.service]]
+id = "com.amazon.network.service"
+
+# DRM support for secure video playback
+[[wants.service]]
+id = "com.amazon.drm.key"
+
+[[wants.service]]
+id = "com.amazon.drm.crypto"
+
+# Accessibility
+[[wants.privilege]]
+id = "com.amazon.devconf.privilege.accessibility"
+
+# Required for secure playback
+[[wants.privilege]]
+id = "com.amazon.media.secureplayback"
+
+[[wants.privilege]]
+id = "com.amazon.privilege.security.file-sharing"
+
+# GIPC SR support
+[[wants.service]]
+id = "com.amazon.gipc.uuid.*"
+
+# ============================================================================
+# TASKS
+# ============================================================================
+
+[tasks]
+[[tasks.work]]
+component-id = "com.testapp.vegaos.onInstallOrUpdateTask"
+mode = "install"
+
+# ============================================================================
+# OFFERS
+# ============================================================================
+
+[offers]
+[[offers.service]]
+id = "com.testapp.vegaos.interface.provider"
+
+[[offers.interaction]]
+id = "com.testapp.vegaos.main"
+
+[[offers.service]]
+id = "com.amazon.gipc.uuid.*"
+
+# ============================================================================
+# MESSAGE
+# ============================================================================
+
+[[message]]
+uri = "pkg://com.testapp.vegaos.main"
+sender-privileges = ["*"]
+receiver-privileges = ["self"]
 
 # ============================================================================
 # ADDITIONAL CONFIGURATION
